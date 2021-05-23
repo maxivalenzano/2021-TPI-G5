@@ -1,6 +1,9 @@
 const express = require("express");
+const secretaryRoutes = require("./server/routes/index");
 const app = express();
 const port = 3000;
+
+app.use("/", secretaryRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
