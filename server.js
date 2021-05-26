@@ -2,6 +2,7 @@ const express = require("express");
 const port = 3000;
 
 const secretaryRoutes = require("./server/routes/index");
+const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
 
@@ -26,6 +27,7 @@ mongoose
   });
 
 app.use("/", secretaryRoutes);
+app.use("/", ventaRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
