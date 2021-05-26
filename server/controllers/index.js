@@ -15,3 +15,11 @@ exports.getBusinessState = (req, res) => {
 
   res.json(respuesta);
 };
+
+exports.postSalesReport = (req, res) => {
+  let response = {
+    msg: "Solo devolvemos lo enviado",
+    content: req.body,
+  };
+  res.json(response);
+};
