@@ -13,7 +13,7 @@ export default function LayoutBasic(props) {
         <div>
             <Header />
             <LoadRoutes routes={routes} />
-            <Footer />
+            <Footer title="Los cracks" description="Página diseñada para la matería de DACS" />
         </div>
     )
 }
