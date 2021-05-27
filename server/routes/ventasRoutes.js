@@ -6,6 +6,7 @@ const {
   modifyByID,
   deleteByID,
 } = require("../controllers/VentasController");
+
 const app = express();
 
 app.get("/ventas", getAllVentas);
@@ -18,6 +19,6 @@ app.patch("/ventas/:id", modifyByID);
 
 app.delete("/ventas/:id", deleteByID);
 
-app.delete("/ventas");
+//app.delete("/ventas");
 
 module.exports = app;
