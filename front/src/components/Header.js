@@ -23,8 +23,8 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <div style={{ background: "#ffA500" }} className={classes.root}>
-      <AppBar position="static" color="transparent">
+    <div className={classes.root}>
+      <AppBar position="static" color="primary">
         <Toolbar>
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
