@@ -5,7 +5,8 @@ const {
   getVentaByID,
   modifyByID,
   deleteByID,
-} = require("../controllers/VentasController");
+} = require("../controllers/ventasController")
+  
 const app = express();
 
 app.get("/ventas", getAllVentas);

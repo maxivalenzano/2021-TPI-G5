@@ -1,10 +1,14 @@
 const express = require("express");
-const port = 3000;
+const cors = require("cors");
+const port = 8081;
 
 const secretaryRoutes = require("./server/routes/index");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
+var corsOp = { origin: "http://localhost:3000" }
+
+app.use(cors(corsOp))
 
 const { url } = require("./server/config/db.config.js");
 const mongoose = require("mongoose");
