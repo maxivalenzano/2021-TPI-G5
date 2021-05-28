@@ -1,6 +1,9 @@
 {
   "name": "2021-TPI-G5",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "2021-TPI-G5",
   "main": "server.js",
   "scripts": {
