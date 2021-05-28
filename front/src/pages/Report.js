@@ -54,12 +54,12 @@ export default function Report() {
         }}
       >
         <Container maxWidth="lg">
-          <div style={{ height: 600, width: "100%" }}>
+          <div style={{ height: 580, width: "100%" }}>
             <DataGrid
               getRowId={(row) => row._id}
               rows={rows}
               columns={columns}
-              pageSize={10}
+              pageSize={9}
             />
           </div>
         </Container>
