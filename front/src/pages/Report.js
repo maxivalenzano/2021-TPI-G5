@@ -1,16 +1,38 @@
 import React, { useState } from "react";
 import Container from '@material-ui/core/Container'
+import Button from "@material-ui/core/Button";
 import { DataGrid } from '@material-ui/data-grid'
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import moment from 'moment'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function Report() {
 
-    const [data, setData] = useState([])
+  const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
   
-    fetch("http://localhost:8081/ventas")
+  const handleClick = () => {
+    setOpen(true);
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  }
+
+    
+    fetch("https://secure-sands-97755.herokuapp.com/ventas")
       .then((response) => response.json())
       .then((data) => {
-        setData(data)
+        setData(data);
+        setLoading(false)
       });
   
       const prettyDate = {
@@ -50,20 +72,28 @@ export default function Report() {
           alignItems: "center",
           justifyContent: "center",
           justifyItems: "center",
-          flexDirection: 'column'
+          flexDirection: "column",
         }}
       >
         <Container maxWidth="lg">
-          <div style={{ height: 600, width: "100%" }}>
+          <div style={{ height: '65vh', width: "100%" }}>
             <DataGrid
               getRowId={(row) => row._id}
               rows={rows}
               columns={columns}
               pageSize={10}
+              loading={loading}
             />
           </div>
         </Container>
-        <button style={{padding: 25, margin: 20}} onClick={() => alert('REPORTE ENVIADO')} >ENVIAR REPORTE</button>
+        <Button variant='contained' onClick={handleClick} style={{margin: 25}}>
+          Enviar Reporte
+        </Button>
+        <Snackbar anchorOrigin={{vertical:'top', horizontal: 'center'}} open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            El reporte se envió correctamente!
+          </Alert>
+        </Snackbar>
       </div>
     );
 }
