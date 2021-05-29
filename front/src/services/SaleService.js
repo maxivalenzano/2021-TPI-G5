@@ -1,27 +1,27 @@
-import axios from "./axiosConfig";
+import axios from "axiosConfig";
 
 const getAll = () => {
-  return axios.get("/foods");
+  return axios.get("/ventas");
 };
 
 const get = id => {
-  return axios.get(`/food/${id}`);
+  return axios.get(`/ventas/${id}`);
 };
 
 const create = data => {
-  return axios.post("/food", data);
+  return axios.post("/ventas", data);
 };
 
 const update = (id, data) => {
-  return axios.patch(`/food/${id}`, data);
+  return axios.patch(`/ventas/${id}`, data);
 };
 
 const remove = id => {
-  return axios.delete(`/food/${id}`);
+  return axios.delete(`/ventas/${id}`);
 };
 
 const removeAll = () => {
-  return axios.delete(`/food`);
+  return axios.delete(`/ventas`);
 };
 
 

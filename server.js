@@ -2,13 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const port = 8081;
 
+const libreria = require("dacs-integrador-g5");
+
 const secretaryRoutes = require("./server/routes/index");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
-var corsOp = { origin: "http://localhost:3000" }
+var corsOp = { origin: [`http://localhost:${port}`, `http://localhost:3000`, `http://localhost:3001`] };
 
-app.use(cors(corsOp))
+app.use(cors(corsOp));
 
 const { url } = require("./server/config/db.config.js");
 const mongoose = require("mongoose");
@@ -40,3 +42,19 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+// (async () => {
+//   let autenticado = await libreria.getTokenDeMinisterio(
+//     "http://localhost:8081/token",
+//     "cracks",
+//     "cracks"
+//   );
+//   // .then(res => {
+//   //   console.log(res);
+//   // })
+//   // .catch(error => {
+//   //   console.log(error);
+//   // });
+//   console.log("autenticado? ");
+//   console.log(autenticado);
+// })();
