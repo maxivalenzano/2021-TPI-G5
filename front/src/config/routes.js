@@ -6,6 +6,9 @@ import About from 'pages/About'
 import Profile from 'pages/Profile'
 import Contact from 'pages/Contact'
 import Home from 'pages/Home'
+import Sales from 'pages/Sales'
+import DebtStatus from 'pages/DebtStatus'
+import Report from 'pages/Report'
 import Error404 from 'pages/Error404'
 
 const routes = [
@@ -32,6 +35,21 @@ const routes = [
             {
                 path: "/about-us",
                 component: About,
+                exact: true
+            },
+            {
+                path: "/sales",
+                component: Sales,
+                exact: true
+            },
+            {
+                path: "/status",
+                component: DebtStatus,
+                exact: true
+            },
+            {
+                path: "/report",
+                component: Report,
                 exact: true
             },
             {
