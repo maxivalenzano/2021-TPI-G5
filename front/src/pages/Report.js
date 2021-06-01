@@ -39,7 +39,7 @@ export default function Report(props) {
     consultaAPI();
   }, []);
 
-  /* Esta wea esta mal
+  /* Esto esta mal
 
      fetch("https://secure-sands-97755.herokuapp.com/ventas")
        .then((response) => response.json())
