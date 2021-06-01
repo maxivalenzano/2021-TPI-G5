@@ -1,42 +1,67 @@
-import React from "react";
-import { Container, Typography, Grid, Button, TextField } from '@material-ui/core';
+import React, { useState } from "react";
+import { Container, Typography, Grid, Button, TextField, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import SaleService from "services/SaleService"
+import moment from 'moment'
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useForm, Controller } from "react-hook-form";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function Sales() {
     const classes = useStyles()
 
     const { control, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data) => {
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen(false);
+    }
+
+    const onSubmit = async (data) => {
         console.log(data);
 
-        SaleService.create(data)
+        await SaleService.create(data)
             .then(response => {
                 console.log(response.data);
+                setOpen(true);
+                resetForm();
             })
             .catch(e => {
                 console.log(e);
             });
+
+
+
+    };
+
+    const resetForm = () => {
         reset({
             denominacion: "",
             codigo_ean: "",
             cantidad_vend: "",
             precio: "",
-            fecha: new Date()
+            fecha: moment().format('yyyy-MM-DD')
         })
-
-
-    };
+    }
 
 
     return (
+        <div style={{
+            backgroundColor: "white",
+            paddingBottom: 200
+        }}>
         <Container maxWidth="sm">
             <div className={classes.mainFeaturedPostContent}>
-                <Typography component="h2" variant="h4" color="inherit" v gutterBottom>
+                <Typography component="h2" variant="h4" color="inherit" gutterBottom>
                     Agregar venta
                 </Typography>
 
@@ -146,7 +171,7 @@ export default function Sales() {
                                 InputLabelProps={{ shrink: true }}
                             />)
                         }
-                        defaultValue={new Date()}
+                        defaultValue={moment().format('yyyy-MM-DD')}
                     />
                 </Grid>
 
@@ -163,35 +188,32 @@ export default function Sales() {
                     </Grid>
                     <Grid item>
                         {/* <Link to="/report" style={{ textDecoration: "none" }}> */}
-                        <Button variant="outlined" color="primary" onClick={reset({
-                            denominacion: "",
-                            codigo_ean: "",
-                            cantidad_vend: "",
-                            precio: "",
-                            fecha: new Date()
-                        })}>
+                        <Button variant="contained" color="primary" onClick={resetForm}>
                             Limpiar
                             </Button>
                         {/* </Link> */}
                     </Grid>
                     <Grid item>
-                        <Link to="/report" style={{ textDecoration: "none" }}>
-                            <Button variant="outlined" color="primary">
-                                Ver Reporte
+                        <Link to="/" style={{ textDecoration: "none" }}>
+                            <Button variant="contained" color="primary">
+                                Volver Atrás
                             </Button>
                         </Link>
                     </Grid>
                 </Grid>
             </div>
 
-
-
-
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    La venta se registró correctamente
+          </Alert>
+            </Snackbar>
 
 
 
 
         </Container>
+        </div>
     )
 }
 

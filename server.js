@@ -5,11 +5,19 @@ const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
 
-const secretaryRoutes = require("./server/routes/index");
+const mockRoutes = require("./server/routes/mockRoutes");
+const externalRoutes = require("./server/routes/externalRoutes");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
-var corsOp = { origin: [`http://localhost:${port}`, `http://localhost:3000`, `http://localhost:3001`, `https://rotiseria-los-cracks.netlify.app`] };
+var corsOp = {
+  origin: [
+    `http://localhost:${port}`,
+    `http://localhost:3000`,
+    `http://localhost:3001`,
+    `https://rotiseria-los-cracks.netlify.app`
+  ],
+};
 
 app.use(cors(corsOp));
 
@@ -33,7 +41,9 @@ mongoose
     process.exit();
   });
 
-app.use("/", secretaryRoutes);
+// app.use("/api", require("./server/routes/index"));
+app.use("/api", mockRoutes);
+app.use("/", externalRoutes);
 app.use("/", ventaRoutes);
 
 app.get("/", (req, res) => {

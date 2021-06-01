@@ -42,14 +42,14 @@ export default function Home() {
                     </Grid>
                     <Grid item>
                         <Link to="/report" style={{ textDecoration: "none" }}>
-                            <Button variant="outlined" color="primary">
+                            <Button variant="contained" color="primary">
                                 Generar reporte
                             </Button>
                         </Link>
                     </Grid>
                     <Grid item>
                         <Link to="/status" style={{ textDecoration: "none" }}>
-                            <Button variant="outlined" color="primary">
+                            <Button variant="contained" color="primary">
                                 Consultar deuda
                             </Button>
                         </Link>

@@ -1,5 +1,3 @@
-// IGNORAR ESTE DOCUMENTO POR AHORA
-
 // Archivo para centralizar el exportaje de los controllers
 const users = ["Y3JhY2tzOmNyYWNrcw==", "sancor@gmail.com"];
 const userTokens = ["tokenardo"];
