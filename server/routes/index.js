@@ -4,14 +4,14 @@ const router = express.Router();
 const {
   getBusinessState,
   postSalesReport,
-  getToken,
   postLogin,
+  postSignUp,
 } = require("../controllers/index");
 
 router.get("/secretaria", getBusinessState);
 
 router.post("/ministerio", postSalesReport);
-router.get("/token", getToken);
 router.post("/login", postLogin);
+router.post("/singup", postSignUp);
 
 module.exports = router;
