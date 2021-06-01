@@ -24,7 +24,7 @@
   "homepage": "https://github.com/FRRe-DACS/2021-TPI-G5#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dacs-integrador-g5": "^1.2.0",
+    "dacs-integrador-g5": "^1.2.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
