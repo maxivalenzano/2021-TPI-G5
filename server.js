@@ -14,6 +14,7 @@ var corsOp = {
     `http://localhost:${port}`,
     `http://localhost:3000`,
     `http://localhost:3001`,
+    `https://rotiseria-los-cracks.netlify.app`
   ],
 };
 
