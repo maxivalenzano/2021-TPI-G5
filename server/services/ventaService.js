@@ -22,7 +22,8 @@ class VentaService {
     async updateVenta(ventaId, venta) {
         const ventaActualizada = await Venta.findByIdAndUpdate(
             ventaId,
-            venta
+            venta,
+            { new: true }
         )
         await ventaActualizada.save();
         return ventaActualizada || {};
