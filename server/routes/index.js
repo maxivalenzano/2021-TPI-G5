@@ -12,6 +12,6 @@ router.get("/secretaria", getBusinessState);
 
 router.post("/ministerio", postSalesReport);
 router.post("/login", postLogin);
-router.post("/singup", postSignUp);
+router.post("/signup", postSignUp);
 
 module.exports = router;

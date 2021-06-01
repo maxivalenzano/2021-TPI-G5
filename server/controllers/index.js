@@ -3,7 +3,7 @@ const { ExternalService } = require("../services/");
 const externalService = new ExternalService();
 
 // Archivo para centralizar el exportaje de los controllers
-const users = ["Y3JhY2tzOmNyYWNrcw=="];
+const users = ["Y3JhY2tzOmNyYWNrcw==", "sancor@gmail.com"];
 const userTokens = ["tokenardo"];
 
 const getBusinessState = (req, res) => {
@@ -54,8 +54,7 @@ const postLogin = (req, res) => {
   const user = req.body.email;
   // console.log(req.headers.authorization);
   // let user = req.headers.authorization.split(" ")[1];
-  let autenticado = false;
-  let respuesta;
+  let respuesta = { autenticado: false };
   if (users.includes(user)) {
     respuesta = {
       autenticado: true,
@@ -76,7 +75,8 @@ const getToken = (req, res) => {
 
 const postSignUp = (req, res) => {
   // reciben todo esto
-  //   "cuit": 20304050605,
+  //   {
+  // "cuit": 20304050605,
   //   "Razon_social": "empresa fantasma 123",
   //   "Industria": "Lacteos",
   //   "email": "example@gmail.com",
@@ -92,7 +92,7 @@ const postSignUp = (req, res) => {
   }
 
   users.push(email);
-  res.send("usuario creado");
+  res.send(`usuario ${email} creado`);
 
   // const encodedBase64Token = Buffer.from(`${username}:${password}`).toString(
   //   "base64"
