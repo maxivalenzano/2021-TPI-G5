@@ -21,6 +21,13 @@ export default function Sales() {
             .catch(e => {
                 console.log(e);
             });
+
+        resetForm();
+
+
+    };
+
+    const resetForm = () => {
         reset({
             denominacion: "",
             codigo_ean: "",
@@ -28,15 +35,13 @@ export default function Sales() {
             precio: "",
             fecha: new Date()
         })
-
-
-    };
+    }
 
 
     return (
         <Container maxWidth="sm">
             <div className={classes.mainFeaturedPostContent}>
-                <Typography component="h2" variant="h4" color="inherit" v gutterBottom>
+                <Typography component="h2" variant="h4" color="inherit" gutterBottom>
                     Agregar venta
                 </Typography>
 
@@ -163,13 +168,7 @@ export default function Sales() {
                     </Grid>
                     <Grid item>
                         {/* <Link to="/report" style={{ textDecoration: "none" }}> */}
-                        <Button variant="outlined" color="primary" onClick={reset({
-                            denominacion: "",
-                            codigo_ean: "",
-                            cantidad_vend: "",
-                            precio: "",
-                            fecha: new Date()
-                        })}>
+                        <Button variant="outlined" color="primary" onClick={resetForm}>
                             Limpiar
                             </Button>
                         {/* </Link> */}
