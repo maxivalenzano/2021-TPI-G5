@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Grid, Button, TextField } from '@material-ui/core';
+import { Container, Typography, Grid, Button, TextField, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import SaleService from "services/SaleService"
 import moment from 'moment'
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useForm, Controller } from "react-hook-form";
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function Item(props) {
     const classes = useStyles()
-    // console.log("datos de row:", props.row)
+
+    const [open, setOpen] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen(false);
+        setOpenDelete(false);
+    }
 
     const [item, setItem] = useState({
         id: "",
@@ -43,7 +58,8 @@ export default function Item(props) {
         await SaleService.update(item._id, data)
             .then(response => {
                 console.log("Item updateado", response.data);
-                setItem(response.data);
+                // setItem(response.data); //hasta que esté deployado en Heroku la actualizacion
+                setOpen(true);
             })
             .catch(e => {
                 console.log(e);
@@ -65,11 +81,12 @@ export default function Item(props) {
         await SaleService.remove(item._id)
             .then(response => {
                 console.log("Eliminado con exito", response.data)
+                setOpenDelete(true);
+                props.history.push("/report")
             })
             .catch(e => {
                 console.log("El error fue: ", e)
             })
-        props.history.push("/report")
     }
 
 
@@ -219,10 +236,16 @@ export default function Item(props) {
             </div>
 
 
-
-
-
-
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    La venta se modificó correctamente
+          </Alert>
+            </Snackbar>
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={openDelete} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    La venta se eliminó correctamente!
+          </Alert>
+            </Snackbar>
 
 
         </Container>

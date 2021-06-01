@@ -1,29 +1,44 @@
-import React from "react";
-import { Container, Typography, Grid, Button, TextField } from '@material-ui/core';
+import React, { useState } from "react";
+import { Container, Typography, Grid, Button, TextField, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import SaleService from "services/SaleService"
 import moment from 'moment'
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { useForm, Controller } from "react-hook-form";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function Sales() {
     const classes = useStyles()
 
     const { control, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data) => {
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen(false);
+    }
+
+    const onSubmit = async (data) => {
         console.log(data);
 
-        SaleService.create(data)
+        await SaleService.create(data)
             .then(response => {
                 console.log(response.data);
+                setOpen(true);
+                resetForm();
             })
             .catch(e => {
                 console.log(e);
             });
 
-        resetForm();
 
 
     };
@@ -184,9 +199,11 @@ export default function Sales() {
                 </Grid>
             </div>
 
-
-
-
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    La venta se registró correctamente
+          </Alert>
+            </Snackbar>
 
 
 
