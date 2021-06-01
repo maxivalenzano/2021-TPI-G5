@@ -9,7 +9,7 @@ const secretaryRoutes = require("./server/routes/index");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
-var corsOp = { origin: [`http://localhost:${port}`, `http://localhost:3000`, `http://localhost:3001`] };
+var corsOp = { origin: [`http://localhost:${port}`, `http://localhost:3000`, `http://localhost:3001`, `https://rotiseria-los-cracks.netlify.app`] };
 
 app.use(cors(corsOp));
 
