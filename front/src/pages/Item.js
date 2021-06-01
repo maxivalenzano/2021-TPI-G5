@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Typography, Grid, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
@@ -7,35 +7,69 @@ import moment from 'moment'
 
 import { useForm, Controller } from "react-hook-form";
 
-export default function Sales() {
+export default function Item(props) {
     const classes = useStyles()
+    // console.log("datos de row:", props.row)
+
+    const [item, setItem] = useState({
+        id: "",
+        denominacion: "",
+        codigo_ean: "",
+        cantidad_vend: "",
+        precio: "",
+        fecha: moment().format('yyyy-MM-DD')
+    });
+
 
     const { control, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    useEffect(() => {
+        const consultaAPI = async () => {
+            const result = await SaleService.get(props.match.params.id)
+            console.log("Obtenido de la API", result.data)
+            setItem(result.data);
+        };
 
-        SaleService.create(data)
+        consultaAPI();
+    }, [props.match.params.id]);
+
+    useEffect(() => {
+        resetForm();
+    }, [item])
+
+    const onSubmit = async (data) => {
+        console.log("Item a modificar:", data);
+
+        await SaleService.update(item._id, data)
             .then(response => {
-                console.log(response.data);
+                console.log("Item updateado", response.data);
+                setItem(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
 
-        resetForm();
-
-
     };
 
     const resetForm = () => {
         reset({
-            denominacion: "",
-            codigo_ean: "",
-            cantidad_vend: "",
-            precio: "",
-            fecha: moment().format('yyyy-MM-DD')
+            denominacion: item.denominacion,
+            codigo_ean: item.codigo_ean,
+            cantidad_vend: item.cantidad_vend,
+            precio: item.precio,
+            fecha: moment(item.fecha).format('yyyy-MM-DD')
         })
+    };
+
+    const deteleItem = async () => {
+        await SaleService.remove(item._id)
+            .then(response => {
+                console.log("Eliminado con exito", response.data)
+            })
+            .catch(e => {
+                console.log("El error fue: ", e)
+            })
+        props.history.push("/report")
     }
 
 
@@ -43,7 +77,7 @@ export default function Sales() {
         <Container maxWidth="sm">
             <div className={classes.mainFeaturedPostContent}>
                 <Typography component="h2" variant="h4" color="inherit" gutterBottom>
-                    Agregar venta
+                    Editar una venta
                 </Typography>
 
             </div>
@@ -67,7 +101,7 @@ export default function Sales() {
                                 onChange={onChange}
                             />)
                         }
-                        defaultValue=""
+                        defaultValue={item.codigo_ean}
                         rules={{ required: true }}
                     />
 
@@ -89,7 +123,7 @@ export default function Sales() {
                                 onChange={onChange}
                             />)
                         }
-                        defaultValue=""
+                        defaultValue={item.denominacion}
                         rules={{ required: true }}
                     />
                 </Grid>
@@ -110,7 +144,7 @@ export default function Sales() {
                                 onChange={onChange}
                             />)
                         }
-                        defaultValue=""
+                        defaultValue={item.precio}
                         rules={{ required: true }}
                     />
                 </Grid>
@@ -131,7 +165,7 @@ export default function Sales() {
                                 onChange={onChange}
                             />)
                         }
-                        defaultValue=""
+                        defaultValue={item.cantidad_vend}
                         rules={{ required: true }}
                     />
                 </Grid>
@@ -152,7 +186,7 @@ export default function Sales() {
                                 InputLabelProps={{ shrink: true }}
                             />)
                         }
-                        defaultValue={moment().format('yyyy-MM-DD')}
+                        defaultValue={item.fecha}
                     />
                 </Grid>
 
@@ -163,19 +197,19 @@ export default function Sales() {
                     <Grid item>
                         {/* <Link to="/sales" style={{ textDecoration: "none" }}> */}
                         <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-                            Registrar
+                            Editar
                         </Button>
                         {/* </Link> */}
                     </Grid>
                     <Grid item>
                         {/* <Link to="/report" style={{ textDecoration: "none" }}> */}
-                        <Button variant="contained" color="primary" onClick={resetForm}>
-                            Limpiar
+                        <Button variant="contained" color="primary" onClick={deteleItem}>
+                            Eliminar
                             </Button>
                         {/* </Link> */}
                     </Grid>
                     <Grid item>
-                        <Link to="/" style={{ textDecoration: "none" }}>
+                        <Link to="/report" style={{ textDecoration: "none" }}>
                             <Button variant="contained" color="primary">
                                 Volver Atrás
                             </Button>

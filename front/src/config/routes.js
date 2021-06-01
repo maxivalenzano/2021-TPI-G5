@@ -9,6 +9,7 @@ import Home from 'pages/Home'
 import Sales from 'pages/Sales'
 import DebtStatus from 'pages/DebtStatus'
 import Report from 'pages/Report'
+import Item from 'pages/Item'
 import Error404 from 'pages/Error404'
 
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
             {
                 path: "/report",
                 component: Report,
+                exact: true
+            },
+            {
+                path: "/item/:id",
+                component: Item,
                 exact: true
             },
             {

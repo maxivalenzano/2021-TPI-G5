@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from '@material-ui/core/Container'
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid"
 import { DataGrid } from '@material-ui/data-grid'
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import moment from 'moment'
+import SaleService from "services/SaleService"
+import { Link } from "react-router-dom";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Report() {
+export default function Report(props) {
 
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(true)
@@ -27,13 +30,22 @@ export default function Report() {
     setOpen(false);
   }
 
-    
-    fetch("https://secure-sands-97755.herokuapp.com/ventas")
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false)
-      });
+  useEffect(() => {
+    const consultaAPI = async () => {
+      const result = await SaleService.getAll()
+      setData(result.data);
+      setLoading(false)
+    };
+
+    consultaAPI();
+  }, []);
+
+    // fetch("https://secure-sands-97755.herokuapp.com/ventas")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setData(data);
+    //     setLoading(false)
+    //   });
   
       const prettyDate = {
         type: "date",
@@ -83,12 +95,27 @@ export default function Report() {
               columns={columns}
               pageSize={9}
               loading={loading}
+              onCellDoubleClick={(row) => { props.history.push("/item/" + row.row._id) }}
             />
           </div>
         </Container>
-        <Button variant='contained' onClick={handleClick} style={{margin: 25}}>
+
+        <div style={{ margin: 25 }}>
+          <Grid container spacing={2} justify="center">
+            <Grid item>
+              <Button variant='contained' color="primary" onClick={handleClick}>
           Enviar Reporte
         </Button>
+            </Grid>
+            <Grid item>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button variant="contained" color="primary">
+                  Volver Atrás
+               </Button>
+              </Link>
+            </Grid>
+          </Grid>
+        </div>
         <Snackbar anchorOrigin={{vertical:'top', horizontal: 'center'}} open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success">
             El reporte se envió correctamente!
