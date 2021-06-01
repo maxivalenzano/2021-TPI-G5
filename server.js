@@ -9,7 +9,13 @@ const secretaryRoutes = require("./server/routes/index");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
-var corsOp = { origin: [`http://localhost:${port}`, `http://localhost:3000`, `http://localhost:3001`] };
+var corsOp = {
+  origin: [
+    `http://localhost:${port}`,
+    `http://localhost:3000`,
+    `http://localhost:3001`,
+  ],
+};
 
 app.use(cors(corsOp));
 
@@ -33,7 +39,7 @@ mongoose
     process.exit();
   });
 
-app.use("/", secretaryRoutes);
+app.use("/api", secretaryRoutes);
 app.use("/", ventaRoutes);
 
 app.get("/", (req, res) => {
