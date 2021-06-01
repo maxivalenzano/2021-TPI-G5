@@ -19,6 +19,6 @@ app.patch("/ventas/:id", modifyByID);
 
 app.delete("/ventas/:id", deleteByID);
 
-app.delete("/ventas");
+//app.delete("/ventas");
 
 module.exports = app;

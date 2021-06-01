@@ -1,4 +1,7 @@
-const Venta = require("../models/VentaModel");
+const { VentaService } = require("../services/");
+
+
+const ventaService = new VentaService();
 
 // denominacion
 // codigo_ean
@@ -13,36 +16,44 @@ const Venta = require("../models/VentaModel");
 // delete venta
 // put venta
 
+/**
+ * Para obtener todas las ventas
+ * @param {resquest}  
+ * @param {*} response 
+ */
 const getAllVentas = async (request, response) => {
-  const ventas = await Venta.find({});
-
   try {
+    const ventas = await ventaService.getAllVentas();
     response.send(ventas);
   } catch (error) {
     response.status(500).send(error);
   }
 };
 
+/**
+ * 
+ * @param {*} request 
+ * @param {*} response 
+ * @returns 
+ */
 const addVenta = async (request, response) => {
-  if (!request.body) {
-    response.status(400).send("No tiene body");
+  if ((Object.keys(request.body).length == 0)) {
+    response.status(400).send("No se ha enviado información en el body");
     return;
   }
 
-  const venta = new Venta(request.body);
-
   try {
-    await venta.save();
+    const venta = await ventaService.addNewVenta(request.body);
     response.send(venta);
   } catch (error) {
+    console.log(error);
     response.status(500).send(error);
   }
 };
 
 const getVentaByID = async (request, response) => {
-  const venta = await Venta.findById(request.params.id);
-
   try {
+    const venta = await ventaService.getVentaById(request.params.id);
     response.send(venta);
   } catch (error) {
     response.status(500).send(error);
@@ -51,11 +62,10 @@ const getVentaByID = async (request, response) => {
 
 const modifyByID = async (request, response) => {
   try {
-    const venta = await Venta.findByIdAndUpdate(
+    const venta = await ventaService.updateVenta(
       request.params.id,
       request.body
     );
-    await venta.save();
     response.send(venta);
   } catch (error) {
     response.status(500).send(error);
@@ -64,10 +74,11 @@ const modifyByID = async (request, response) => {
 
 const deleteByID = async (request, response) => {
   try {
-    const venta = await Venta.findByIdAndDelete(request.params.id);
+    console.log("Estoy en delete!")
+    const venta = await ventaService.deleteVentaById(request.params.id);
 
-    if (!venta) response.status(404).send("La venta buscada no existe");
-    response.status(200).send();
+    if (venta == {}) response.status(404).send("La venta buscada no existe");
+    response.status(200).send(venta);
   } catch (error) {
     response.status(500).send(error);
   }
@@ -90,4 +101,4 @@ module.exports = {
   getVentaByID,
   modifyByID,
   deleteByID,
-};
+}

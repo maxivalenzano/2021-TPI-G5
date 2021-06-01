@@ -1,6 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const port = 8081;
+const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
 
@@ -40,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`La RotiseriApp is up & running at http://localhost:${port}`);
 });
 
 // (async () => {
