@@ -1,17 +1,3 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 // Archivo para centralizar el exportaje de las rutas
-const {
-  getBusinessState,
-  postSalesReport,
-  postLogin,
-  postSignUp,
-} = require("../controllers/index");
-
-router.get("/secretaria", getBusinessState);
-
-router.post("/ministerio", postSalesReport);
-router.post("/login", postLogin);
-router.post("/signup", postSignUp);
-
 module.exports = router;

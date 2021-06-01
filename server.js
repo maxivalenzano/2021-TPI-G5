@@ -5,7 +5,8 @@ const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
 
-const secretaryRoutes = require("./server/routes/index");
+const mockRoutes = require("./server/routes/mockRoutes");
+const externalRoutes = require("./server/routes/externalRoutes");
 const ventaRoutes = require("./server/routes/ventasRoutes");
 
 const app = express();
@@ -39,7 +40,9 @@ mongoose
     process.exit();
   });
 
-app.use("/api", secretaryRoutes);
+// app.use("/api", require("./server/routes/index"));
+app.use("/api", mockRoutes);
+app.use("/", externalRoutes);
 app.use("/", ventaRoutes);
 
 app.get("/", (req, res) => {
