@@ -6,7 +6,7 @@ const {
   postReports,
 } = require("../controllers/externalController");
 
-router.get("/secretaria", getSecretaryStatus);
+router.post("/secretaria", getSecretaryStatus);
 
 router.post("/ministerio", postReports);
 
