@@ -91,6 +91,10 @@ export default function Item(props) {
 
 
     return (
+        <div style={{
+            backgroundColor: "white",
+            paddingBottom: 200
+        }}>
         <Container maxWidth="sm">
             <div className={classes.mainFeaturedPostContent}>
                 <Typography component="h2" variant="h4" color="inherit" gutterBottom>
@@ -249,6 +253,7 @@ export default function Item(props) {
 
 
         </Container>
+        </div>
     )
 }
 
