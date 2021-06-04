@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Empresa - Grupo5 👋</h1>
+<h1 align="center"> Empresa - Grupo5 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-14.x-blue.svg" />
@@ -46,11 +46,16 @@ npm run test
 
 ## Author
 
-👤 **Grupo5 - DACS**
+**Grupo5 - DACS**
+👤 **Maximiliano Valenzano**
+👤 **Jose Cabrera**
+👤 **Jorge Curima**
+👤 **Erik Vicentin**
+👤 **Facundo Quiroz**
 
 * Website: https://frre-dacs.github.io/
-* Twitter: [@maxivalenzano](https://twitter.com/maxivalenzano)
 * Github: [@FRRe-DACS](https://github.com/FRRe-DACS)
+* Twitter: [@maxivalenzano](https://twitter.com/maxivalenzano)
 * LinkedIn: [@maxivalenzano](https://linkedin.com/in/maxivalenzano)
 
 ## 🤝 Contributing
