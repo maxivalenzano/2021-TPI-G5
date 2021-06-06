@@ -9,8 +9,10 @@ export default function Status() {
       const result = await fetch(
         "https://secure-sands-97755.herokuapp.com/secretaria",
         {
-          headers: {
-            Authorization: "Bearer tokenardo",
+          method: "POST",
+          body: {
+            email: "sancor@gmail.com",
+            password: "sancorelmejor",
           },
         }
       )
