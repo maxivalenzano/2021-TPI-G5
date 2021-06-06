@@ -50,7 +50,7 @@ npm run test
 👤 **Maximiliano Valenzano**
 👤 **Jose Cabrera**
 👤 **Jorge Curima**
-👤 **Erik Vicentin**
+👤 **Erick Vicentin**
 👤 **Facundo Quiroz**
 
 * Website: https://frre-dacs.github.io/
