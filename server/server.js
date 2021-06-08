@@ -7,11 +7,11 @@ const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
 
-const mockRoutes = require("./server/routes/mockRoutes");
-const externalRoutes = require("./server/routes/externalRoutes");
-const ventaRoutes = require("./server/routes/ventasRoutes");
-const userRoutes = require("./server/routes/userRoutes");
-const authRoutes = require("./server/routes/authRoutes");
+const mockRoutes = require("./routes/mockRoutes");
+const externalRoutes = require("./routes/externalRoutes");
+const ventaRoutes = require("./routes/ventasRoutes");
+const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -26,22 +26,19 @@ var corsOp = {
 
 app.use(cors(corsOp));
 
-const { url } = require("./config/db.config.js");
-const mongoose = require("mongoose");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // database MySQL
-// const db = require("./server/models/sequelize");
+// const db = require("./models/sequelize");
 // const Role = db.role;
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log('Conectado a Sequelize');
 //   initial();
 // });
 
-const { url } = require("./server/config/db.config.js");
+const { url } = require("./config/db.config.js");
 const mongoose = require("mongoose");
 
 mongoose
@@ -58,7 +55,7 @@ mongoose
     process.exit();
   });
 
-// app.use("/api", require("./server/routes/index"));
+// app.use("/api", require("./routes/index"));
 app.use("/api", mockRoutes);
 app.use("/", externalRoutes);
 app.use("/", ventaRoutes);
