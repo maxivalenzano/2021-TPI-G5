@@ -50,7 +50,7 @@ npm run test
 👤 **Maximiliano Valenzano**
 👤 **Jose Cabrera**
 👤 **Jorge Curima**
-👤 **Erik Vicentin**
+👤 **Erick Vicentin**
 👤 **Facundo Quiroz**
 
 * Website: https://frre-dacs.github.io/
@@ -73,3 +73,5 @@ This project is [ISC](https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICEN
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+# 2021-TPI-G5
+2021-TPI-G5

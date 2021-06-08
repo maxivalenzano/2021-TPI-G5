@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express'), 
+swaggerDocument = require('./swagger.json');
 const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
@@ -12,6 +14,7 @@ const userRoutes = require("./server/routes/userRoutes");
 const authRoutes = require("./server/routes/authRoutes");
 
 const app = express();
+
 var corsOp = {
   origin: [
     `http://localhost:${port}`,
@@ -23,8 +26,12 @@ var corsOp = {
 
 app.use(cors(corsOp));
 
+const { url } = require("./config/db.config.js");
+const mongoose = require("mongoose");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // database MySQL
 // const db = require("./server/models/sequelize");
