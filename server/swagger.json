@@ -1,0 +1,162 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "RotiseriApp",
+        "description": "Rotiseria Los Cracks - Enterprise Application Software",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3001",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Ventas",
+            "description": "API for Ventas in the empresita"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/ventas": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Get all ventas in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Ventas"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Ventas"
+                ],
+                "description": "Create new venta",
+                "parameters": [
+                    {
+                        "name": "venta",
+                        "in": "body",
+                        "description": "Venta a ser creada",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                }
+            }
+        },
+        "/ventas/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": "true",
+                    "description": "Id de venta que deseas buscar",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Get venta by id",
+                "tags": [
+                    "Ventas"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "parameters": [
+                    {
+                        "name": "venta",
+                        "in": "body",
+                        "description": "Venta with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                ],
+                "summary": "Patch venta by id",
+                "tags": [
+                    "Ventas"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Delete venta by id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Venta"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Venta": {
+            "properties": {
+                "denominacion": {
+                    "type": "string"
+                },
+                "codigo_ean": {
+                    "type": "string"
+                },
+                "cantidad_vend": {
+                    "type": "string"
+                },
+                "precio": {
+                    "type": "integer"
+                },
+                "fecha": {
+                    "type": "string"
+                }
+            }
+        },
+        "Ventas": {
+            "type": "array",
+            "$ref": "#/definitions/Venta"
+        }
+    }
+}

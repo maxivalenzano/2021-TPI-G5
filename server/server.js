@@ -1,15 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express'), 
+swaggerDocument = require('./swagger.json');
 const port = process.env.PORT;
 
 const libreria = require("dacs-integrador-g5");
 
-const mockRoutes = require("./server/routes/mockRoutes");
-const externalRoutes = require("./server/routes/externalRoutes");
-const ventaRoutes = require("./server/routes/ventasRoutes");
+const mockRoutes = require("./routes/mockRoutes");
+const externalRoutes = require("./routes/externalRoutes");
+const ventaRoutes = require("./routes/ventasRoutes");
 
 const app = express();
+
 var corsOp = {
   origin: [
     `http://localhost:${port}`,
@@ -21,11 +24,12 @@ var corsOp = {
 
 app.use(cors(corsOp));
 
-const { url } = require("./server/config/db.config.js");
+const { url } = require("./config/db.config.js");
 const mongoose = require("mongoose");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 mongoose
   .connect(url, {
