@@ -8,6 +8,8 @@ const libreria = require("dacs-integrador-g5");
 const mockRoutes = require("./server/routes/mockRoutes");
 const externalRoutes = require("./server/routes/externalRoutes");
 const ventaRoutes = require("./server/routes/ventasRoutes");
+const userRoutes = require("./server/routes/userRoutes");
+const authRoutes = require("./server/routes/authRoutes");
 
 const app = express();
 var corsOp = {
@@ -21,11 +23,19 @@ var corsOp = {
 
 app.use(cors(corsOp));
 
-const { url } = require("./server/config/db.config.js");
-const mongoose = require("mongoose");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// database MySQL
+// const db = require("./server/models/sequelize");
+// const Role = db.role;
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log('Conectado a Sequelize');
+//   initial();
+// });
+
+const { url } = require("./server/config/db.config.js");
+const mongoose = require("mongoose");
 
 mongoose
   .connect(url, {
@@ -45,6 +55,10 @@ mongoose
 app.use("/api", mockRoutes);
 app.use("/", externalRoutes);
 app.use("/", ventaRoutes);
+
+// routes auth
+app.use("/", userRoutes)
+app.use("/", authRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -69,3 +83,20 @@ app.listen(port, () => {
 //   console.log("autenticado? ");
 //   console.log(autenticado);
 // })();
+
+// function initial() {
+//   Role.create({
+//     id: 1,
+//     name: "user"
+//   });
+
+//   Role.create({
+//     id: 2,
+//     name: "mod"
+//   });
+
+//   Role.create({
+//     id: 3,
+//     name: "admin"
+//   });
+// }
