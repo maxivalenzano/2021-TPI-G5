@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// database MySQL
+// reset database MySQL
 // const db = require("./models/sequelize");
 // const Role = db.role;
 // db.sequelize.sync({ force: true }).then(() => {

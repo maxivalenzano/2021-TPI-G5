@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const { verifySignUp } = require("../middleware");
-const { signup, signin } = require("../controllers/authController");
+const { signup, signin, recovery } = require("../controllers/authController");
 
 app.use(function (req, res, next) {
   res.header(
@@ -22,5 +22,12 @@ app.post(
 
 app.post("/api/auth/signin", signin);
 
+app.post(
+  "/api/auth/recovery",
+  [
+    verifySignUp.checkUsernameOrEmail,
+  ],
+  recovery
+);
 
 module.exports = app;

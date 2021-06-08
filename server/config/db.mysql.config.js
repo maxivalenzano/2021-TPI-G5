@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 module.exports = {
-    HOST: "us-cdbr-east-03.cleardb.com",
-    USER: "b6def9c9e50ecc",
-    PASSWORD: "5c37b9fa",
-    DB: "heroku_eced50f94815310",
+    HOST: process.env.HOST_AUTH,
+    USER: process.env.USER_AUTH,
+    PASSWORD: process.env.PASSWORD_AUTH,
+    DB: process.env.DB_AUTH,
     dialect: "mysql",
     pool: {
         max: 5,
