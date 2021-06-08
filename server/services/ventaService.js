@@ -1,4 +1,4 @@
-const { Venta } = require("../models/index");
+const { Venta } = require("../models/mongoose/index");
 
 class VentaService {
 
