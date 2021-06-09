@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://secure-sands-97755.herokuapp.com",
+  baseURL: "https://g5-rotiseriapp.herokuapp.com",
   headers: {
     "Content-type": "application/json"
   },

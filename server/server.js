@@ -15,9 +15,8 @@ const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-var corsOp = {
+let corsOp = {
   origin: [
-    `http://localhost:${port}`,
     `http://localhost:3000`,
     `http://localhost:3001`,
     `https://rotiseria-los-cracks.netlify.app`

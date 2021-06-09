@@ -5,8 +5,8 @@ const Role = db.role;
 
 const Op = db.Sequelize.Op;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+let jwt = require("jsonwebtoken");
+let bcrypt = require("bcryptjs");
 
 const signup = (req, res) => {
 
@@ -53,7 +53,7 @@ const signin = (req, res) => {
         return res.status(404).send({ message: "Usuario no encontrado" });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
+      let passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
@@ -65,15 +65,15 @@ const signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      let token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 horas
       });
 
-      var authorities = [];
+      let authorities = [];
       user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
-        }
+        roles.forEach(rol => {
+          authorities.push(`ROL_${rol.name.toUpperCase()}`);
+        });
         res.status(200).send({
           id: user.id,
           username: user.username,
@@ -91,6 +91,33 @@ const signin = (req, res) => {
 const recovery = (req, res) => {
   const password = bcrypt.hashSync(req.body.password, 8);
   const email = req.body.email;
+
+  User.findOne({
+    where: {
+      username: req.body.username
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado" });
+      }
+
+      let passwordSame = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+      console.log(passwordSame)
+      if (passwordSame) {
+        return res.status(400).send({
+          message: "No se pueden usar contraseñas anteriores"
+        });
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+
 
   User.update(
     { password: password },

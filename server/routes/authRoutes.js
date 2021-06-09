@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
 });
 
 app.post(
-  "/api/auth/signup",
+  "/auth/signup",
   [
     verifySignUp.checkDuplicateUsernameOrEmail,
     verifySignUp.checkRolesExisted
@@ -20,10 +20,10 @@ app.post(
   signup
 );
 
-app.post("/api/auth/signin", signin);
+app.post("/auth/signin", signin);
 
 app.post(
-  "/api/auth/recovery",
+  "/auth/recovery",
   [
     verifySignUp.checkUsernameOrEmail,
   ],
