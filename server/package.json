@@ -1,5 +1,5 @@
 {
-  "name": "2021-TPI-G5",
+  "name": "2021-tpi-g5",
   "version": "1.0.0",
   "engines": {
     "node": "14.x"
@@ -23,15 +23,19 @@
   },
   "homepage": "https://github.com/FRRe-DACS/2021-TPI-G5#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dacs-integrador-g5": "^1.2.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.12.10",
     "readme-md-generator": "^1.0.0",
     "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
