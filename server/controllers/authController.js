@@ -66,7 +66,7 @@ const signin = (req, res) => {
       }
 
       let token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 horas
+        expiresIn: 3600 // 1 horas
       });
 
       let authorities = [];
