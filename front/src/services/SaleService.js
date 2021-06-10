@@ -1,31 +1,32 @@
 import axios from "axiosConfig";
+import authHeader from "./auth-header";
 
 const getAll = () => {
-  return axios.get("/ventas");
+  return axios.get("/ventas", { headers: authHeader() });
 };
 
 const get = (id) => {
-  return axios.get(`/ventas/${id}`);
+  return axios.get(`/ventas/${id}`, { headers: authHeader() });
 };
 
 const create = (data) => {
-  return axios.post("/ventas", data);
+  return axios.post("/ventas", { headers: authHeader() }, data);
 };
 
 const update = (id, data) => {
-  return axios.patch(`/ventas/${id}`, data);
+  return axios.patch(`/ventas/${id}`, { headers: authHeader() }, data);
 };
 
 const remove = (id) => {
-  return axios.delete(`/ventas/${id}`);
+  return axios.delete(`/ventas/${id}`, { headers: authHeader() });
 };
 
 const removeAll = () => {
-  return axios.delete(`/ventas`);
+  return axios.delete(`/ventas`, { headers: authHeader() });
 };
 
 const getStatus = () => {
-  return axios.get("/secretaria");
+  return axios.get("/secretaria", { headers: authHeader() });
 };
 
 const object = {

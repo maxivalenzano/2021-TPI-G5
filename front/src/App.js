@@ -1,42 +1,30 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import routes from 'config/routes';
-import Login from 'pages/Login'
-import Footer from 'components/Footer'
+import authRoutes from 'config/auth.routes';
+import PrivateRouterWithSubRoutes from 'components/PrivateRouters'
+import RouterWithSubRoutes from 'components/RouterWithSubRoutes'
 
-function App() {
+const App = () => {
 
-  const login = true;
-
+  // console.log("Cookies: ", auth)
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
-        <Route path='/login'>
-          <Login />
-          <Footer
-            title="Los cracks"
-            description="Página diseñada para la matería de DACS"
-          />
-        </Route>
+        {
+          authRoutes.map((route, index) => (
+            <RouterWithSubRoutes key={index} {...route} />
+          ))
+        }
 
-        {login &&
+        {
           routes.map((route, index) => (
-          <RouterWithSubRoutes key={index} {...route} />
+            <PrivateRouterWithSubRoutes key={index} {...route} />
           ))
         }
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
-}
-
-function RouterWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.path}
-      exact={route.exact}
-      render={props => <route.component routes={route.routes} {...props} />}
-    />
-  )
 }
 
 export default App;

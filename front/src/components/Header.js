@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import logo from "../assets/logo.png";
+import AuthService from "../services/AuthService"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +44,7 @@ export default function Header() {
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <Button color="default">Profile</Button>
           </Link>
+          <Button color="default" onClick={() => { AuthService.logout(); window.location.reload() }}>Salir</Button>
         </Toolbar>
       </AppBar>
     </div>
