@@ -54,19 +54,16 @@ const SignIn = (props) => {
 
     const validationSchema = Yup.object().shape({
         username: Yup.string()
-            .required('Username is required')
-            .min(4, 'Username must be at least 6 characters')
-            .max(20, 'Username must not exceed 20 characters'),
-        // email: Yup.string()
-        //     .required('Email is required')
-        //     .email('Email is invalid'),
+            .required('El nombre de usuario es requerido')
+            .min(4, 'El nombre de usuario debe tener al menos 6 caracteres')
+            .max(20, 'El nombre de usuario no debe exceder los 20 caracteres'),
         password: Yup.string()
-            .required('Password is required')
+            .required('La contraseña es requerida')
             // .matches(
             //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            //     "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character")
-            .min(6, 'Password must be at least 6 characters')
-            .max(40, 'Password must not exceed 40 characters'),
+            //     "Debe contener 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial")
+            .min(6, 'La contraseña debe tener al menos 6 caracteres')
+            .max(40, 'La contraseña no debe exceder los 40 caracteres'),
     });
 
     const { handleSubmit, reset, control, formState: { errors } } = useForm({
@@ -93,9 +90,12 @@ const SignIn = (props) => {
             if (response.data.accessToken) {
                 Cookies.set('access_token', JSON.stringify(response.data));
                 // localStorage.setItem("user", );
+                setMessage("Usuario verificado con éxito")
+                setStatus("success")
+                setOpenSnackB(true)
                 setTimeout(() => {
-                    window.location.reload();
                     props.history.push('/');
+                    window.location.reload();
                 }, 1000);
                 // return <Redirect to={state.from || '/'} />
             }
@@ -106,6 +106,7 @@ const SignIn = (props) => {
                 error.message ||
                 error.toString());
             setMessage(resMessage);
+            setStatus("warning")
             setOpenSnackB(true)
         }
         console.log("desde el login: ", response)
@@ -126,6 +127,7 @@ const SignIn = (props) => {
 
     const [openSnackB, setOpenSnackB] = useState(false)
     const [message, setMessage] = useState("")
+    const [status, setStatus] = useState("warning")
 
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -276,7 +278,7 @@ const SignIn = (props) => {
                     autoHideDuration={6000}
                     onClose={handleClose}
                 >
-                    <Alert onClose={handleClose} severity="warning">
+                    <Alert onClose={handleClose} severity={status}>
                         {message}
                     </Alert>
                 </Snackbar>

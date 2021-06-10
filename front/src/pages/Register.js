@@ -52,22 +52,22 @@ const SignUp = () => {
 
     const validationSchema = Yup.object().shape({
         username: Yup.string()
-            .required('Username is required')
-            .min(4, 'Username must be at least 6 characters')
-            .max(20, 'Username must not exceed 20 characters'),
+            .required('El nombre de usuario es requerido')
+            .min(4, 'El nombre de usuario debe tener al menos 6 caracteres')
+            .max(20, 'El nombre de usuario no debe exceder los 20 caracteres'),
         email: Yup.string()
-            .required('Email is required')
-            .email('Email is invalid'),
+            .required('El correo electronico es requerido')
+            .email('El correo es invalido'),
         password: Yup.string()
-            .required('Password is required')
+            .required('La contraseña es requerida')
             .matches(
                 /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character")
-            .min(6, 'Password must be at least 6 characters')
-            .max(40, 'Password must not exceed 40 characters'),
+            "Debe contener 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial")
+            .min(6, 'La contraseña debe tener al menos 6 caracteres')
+            .max(40, 'La contraseña no debe exceder los 40 caracteres'),
         confirmPassword: Yup.string()
-            .required('Confirm Password is required')
-            .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
+            .required('Se requiere confirmación de contraseña')
+            .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden'),
     });
 
     const { handleSubmit, reset, control, formState: { errors }, } = useForm({
