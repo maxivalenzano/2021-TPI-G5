@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Typography, Grid, Button, TextField, Snackbar } from '@material-ui/core';
+import { Container, Typography, Grid, Button, TextField, Snackbar, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import SaleService from "services/SaleService"
@@ -18,7 +18,9 @@ export default function Sales() {
     const { control, handleSubmit, reset } = useForm();
 
     const [open, setOpen] = useState(false);
-
+    const [sending, setSending] = useState(false)
+    const [message, setMessage] = useState("")
+    const [status, setStatus] = useState("warning")
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
@@ -27,6 +29,7 @@ export default function Sales() {
     }
 
     const onSubmit = async (data) => {
+        setSending(true);
         console.log(data);
 
         await SaleService.create(data)
@@ -34,13 +37,16 @@ export default function Sales() {
                 console.log(response.data);
                 setOpen(true);
                 resetForm();
+                setStatus("success")
+                setMessage("La venta se registró correctamente")
             })
             .catch(e => {
-                console.log(e);
+                setOpen(true);
+                console.log(JSON.stringify(e.message));
+                setMessage(JSON.stringify(e.message));
+                setStatus("warning")
             });
-
-
-
+        setSending(false);
     };
 
     const resetForm = () => {
@@ -182,7 +188,7 @@ export default function Sales() {
                     <Grid item>
                         {/* <Link to="/sales" style={{ textDecoration: "none" }}> */}
                         <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-                            Registrar
+                                {sending ? <CircularProgress color="secondary" size={22} /> : "Registrar"}
                         </Button>
                         {/* </Link> */}
                     </Grid>
@@ -204,8 +210,8 @@ export default function Sales() {
             </div>
 
             <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    La venta se registró correctamente
+                    <Alert onClose={handleClose} severity={status}>
+                        {message}
           </Alert>
             </Snackbar>
 
