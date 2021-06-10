@@ -88,7 +88,7 @@ const SignIn = (props) => {
         try {
             response = await AuthService.login(data);
             if (response.data.accessToken) {
-                Cookies.set('access_token', JSON.stringify(response.data));
+                Cookies.set('access_token', JSON.stringify(response.data), { expires: 1 });
                 // localStorage.setItem("user", );
                 setMessage("Usuario verificado con éxito")
                 setStatus("success")
