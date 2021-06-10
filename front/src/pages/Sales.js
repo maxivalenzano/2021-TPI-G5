@@ -188,7 +188,7 @@ export default function Sales() {
                     <Grid item>
                         {/* <Link to="/sales" style={{ textDecoration: "none" }}> */}
                         <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-                                {sending ? <CircularProgress color="secondary" size={22} /> : "Registrar"}
+                                {sending ? <>Registrando <CircularProgress color="secondary" size={22} /> </ > : "Registrar"}
                         </Button>
                         {/* </Link> */}
                     </Grid>

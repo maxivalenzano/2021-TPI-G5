@@ -6,6 +6,7 @@ import {
   Button,
   TextField,
   Snackbar,
+  CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -23,14 +24,16 @@ export default function Item(props) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendingDelete, setSendingDelete] = useState(false)
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("warning");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
-    setOpenDelete(false);
   };
 
   const [item, setItem] = useState({
@@ -60,17 +63,24 @@ export default function Item(props) {
   }, [item]);
 
   const onSubmit = async (data) => {
+    setSending(true);
     console.log("Item a modificar:", data);
 
     await SaleService.update(item._id, data)
       .then((response) => {
         console.log("Item updateado", response.data);
         // setItem(response.data); //hasta que esté deployado en Heroku la actualizacion
+        setStatus("success")
+        setMessage("La venta se modificó correctamente")
         setOpen(true);
       })
       .catch((e) => {
-        console.log(e);
+        console.log(JSON.stringify(e.message));
+        setMessage(JSON.stringify(e.message));
+        setStatus("warning")
+        setOpen(true);
       });
+    setSending(false);
   };
 
   const resetForm = () => {
@@ -84,15 +94,24 @@ export default function Item(props) {
   };
 
   const deteleItem = async () => {
+    setSendingDelete(true);
     await SaleService.remove(item._id)
       .then((response) => {
         console.log("Eliminado con exito", response.data);
-        setOpenDelete(true);
-        props.history.push("/report");
+        setStatus("success")
+        setMessage("La venta se eliminó correctamente")
+        setOpen(true);
+        setTimeout(() => {
+          props.history.push("/report");
+        }, 1000);
       })
       .catch((e) => {
-        console.log("El error fue: ", e);
+        console.log(JSON.stringify(e.message));
+        setStatus("warning")
+        setMessage(JSON.stringify(e.message));
+        setOpen(true);
       });
+    setSendingDelete(false);
   };
 
   return (
@@ -221,18 +240,19 @@ export default function Item(props) {
             <Grid item>
               {/* <Link to="/sales" style={{ textDecoration: "none" }}> */}
               <Button
+                fullWidth
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit(onSubmit)}
               >
-                Editar
+                {sending ? <> Editando <CircularProgress color="secondary" size={22} /> </ > : "Editar"}
               </Button>
               {/* </Link> */}
             </Grid>
             <Grid item>
               {/* <Link to="/report" style={{ textDecoration: "none" }}> */}
-              <Button variant="contained" color="primary" onClick={deteleItem}>
-                Eliminar
+              <Button fullWidth variant="contained" color="primary" onClick={deteleItem}>
+                {sendingDelete ? <>Eliminando <CircularProgress color="secondary" size={22} /> </ > : "Eliminar"}
               </Button>
               {/* </Link> */}
             </Grid>
@@ -252,20 +272,11 @@ export default function Item(props) {
           autoHideDuration={6000}
           onClose={handleClose}
         >
-          <Alert onClose={handleClose} severity="success">
-            La venta se modificó correctamente
+          <Alert onClose={handleClose} severity={status}>
+            {message}
           </Alert>
         </Snackbar>
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={openDelete}
-          autoHideDuration={6000}
-          onClose={handleClose}
-        >
-          <Alert onClose={handleClose} severity="success">
-            La venta se eliminó correctamente!
-          </Alert>
-        </Snackbar>
+
       </Container>
     </div>
   );
