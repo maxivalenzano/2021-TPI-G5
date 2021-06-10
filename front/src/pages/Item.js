@@ -75,9 +75,14 @@ export default function Item(props) {
         setOpen(true);
       })
       .catch((e) => {
-        console.log(JSON.stringify(e.message));
+        // console.log(e.message);
+        if (e.message == `Request failed with status code 403`) {
+          setStatus("error");
+          setMessage("No tiene autorizacion para modificar, llame a un Administrador")
+        } else {
         setMessage(JSON.stringify(e.message));
-        setStatus("warning")
+          setStatus("warning")
+        }
         setOpen(true);
       });
     setSending(false);
@@ -106,9 +111,14 @@ export default function Item(props) {
         }, 1000);
       })
       .catch((e) => {
-        console.log(JSON.stringify(e.message));
-        setStatus("warning")
+        // console.log(JSON.stringify(e.message));
+        if (e.message == `Request failed with status code 403`) {
+          setStatus("error");
+          setMessage("No tiene autorizacion para eliminar, llame a un Administrador")
+        } else {
         setMessage(JSON.stringify(e.message));
+          setStatus("warning")
+        }
         setOpen(true);
       });
     setSendingDelete(false);
