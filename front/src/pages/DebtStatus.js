@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import SaleService from "services/SaleService";
+// import SaleService from "services/SaleService";
 
 export default function Status() {
   const [status, setStatus] = useState(true);
 
   useEffect(() => {
     const consultaAPI = async () => {
-      const result = await fetch(
-        "https://secure-sands-97755.herokuapp.com/secretaria",
+      await fetch(
+        "https://g5-rotiseriapp.herokuapp.com",
         {
           method: "POST",
           body: {

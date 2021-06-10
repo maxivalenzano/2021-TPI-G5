@@ -121,7 +121,7 @@ const recovery = (req, res) => {
 
   User.update(
     { password: password },
-    { where: { email: email } })
+    { where: { email: email, username: req.body.username } })
     .then(user => {
       if (user == 1) {
         res.send({

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import {
     Avatar, Button, CssBaseline, TextField,
-    Snackbar, Link, Grid, Typography, Container,
-    InputAdornment, IconButton, CircularProgress
+    Link, Grid, Typography, Container, InputAdornment,
+    IconButton, CircularProgress, Snackbar
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from "@material-ui/lab/Alert";
-
 import AuthService from 'services/AuthService'
 
 import { useForm, Controller } from "react-hook-form";
@@ -17,8 +16,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-import { Link as LinkRouter } from 'react-router-dom';
-import Cookies from 'js-cookie'
+import { Link as LinkRouter } from "react-router-dom"
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const SignIn = (props) => {
+const SignUp = () => {
     const classes = useStyles();
 
     const validationSchema = Yup.object().shape({
@@ -57,48 +55,36 @@ const SignIn = (props) => {
             .required('Username is required')
             .min(4, 'Username must be at least 6 characters')
             .max(20, 'Username must not exceed 20 characters'),
-        // email: Yup.string()
-        //     .required('Email is required')
-        //     .email('Email is invalid'),
+        email: Yup.string()
+            .required('Email is required')
+            .email('Email is invalid'),
         password: Yup.string()
             .required('Password is required')
-            // .matches(
-            //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            //     "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character")
+            .matches(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character")
             .min(6, 'Password must be at least 6 characters')
             .max(40, 'Password must not exceed 40 characters'),
+        confirmPassword: Yup.string()
+            .required('Confirm Password is required')
+            .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
     });
 
-    const { handleSubmit, reset, control, formState: { errors } } = useForm({
+    const { handleSubmit, reset, control, formState: { errors }, } = useForm({
         resolver: yupResolver(validationSchema),
     });
 
-    const [sending, setSending] = useState(false)
+    // console.log(isValid, isValidating)
 
-    // const irA = () => {
-    //     props.history.push("/acasa");
-    //     window.location.reload();
-    // }
-
-    // const { state } = useLocation();
-    // const patch = (state.from.pathname || '/').toString();
-    // console.log("location:", patch)
-
-    // state ? console.log("location2:", props.location.state.pathname) : null
     const onSubmit = async (data) => {
-        let response
         setSending(true)
+        console.log(data);
+        let response
         try {
-            response = await AuthService.login(data);
-            if (response.data.accessToken) {
-                Cookies.set('access_token', JSON.stringify(response.data));
-                // localStorage.setItem("user", );
-                setTimeout(() => {
-                    window.location.reload();
-                    props.history.push('/');
-                }, 1000);
-                // return <Redirect to={state.from || '/'} />
-            }
+            response = await AuthService.register(data);
+            setMessage(response.data.message)
+            setStatus("success")
+            resetForm()
         } catch (error) {
             const resMessage = ((error.response &&
                 error.response.data &&
@@ -106,26 +92,25 @@ const SignIn = (props) => {
                 error.message ||
                 error.toString());
             setMessage(resMessage);
-            setOpenSnackB(true)
+            setStatus("warning")
         }
-        console.log("desde el login: ", response)
-        resetForm()
+        setOpenSnackB(true)
         setSending(false)
+        console.log(response.data)
     };
 
     const resetForm = () => {
         reset({
             username: "",
             password: "",
-            email: ""
+            email: "",
+            confirmPassword: ""
         })
     }
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
+    const [sending, setSending] = useState(false)
     const [openSnackB, setOpenSnackB] = useState(false)
     const [message, setMessage] = useState("")
+    const [status, setStatus] = useState("warning")
 
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -133,6 +118,13 @@ const SignIn = (props) => {
         }
         setOpenSnackB(false);
     };
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+    const handleClickShowPasswordConfirm = () => setShowPasswordConfirm(!showPasswordConfirm);
+    const handleMouseDownPasswordConfirm = () => setShowPasswordConfirm(!showPasswordConfirm);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -142,7 +134,7 @@ const SignIn = (props) => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Iniciar Sesión
+                    Registrarse
                 </Typography>
                 <form className={classes.form} noValidate>
 
@@ -172,7 +164,7 @@ const SignIn = (props) => {
                         render={({ message }) => <p className={classes.errorMsj}>{message}</p>}
                     />
 
-                    {/* <Controller
+                    <Controller
                         control={control}
                         name="email"
                         render={({ field: { onChange, onBlur, value, ref } }) => (
@@ -195,7 +187,7 @@ const SignIn = (props) => {
                         errors={errors}
                         name="email"
                         render={({ message }) => <p className={classes.errorMsj}>{message}</p>}
-                    /> */}
+                    />
 
                     <Controller
                         control={control}
@@ -210,10 +202,10 @@ const SignIn = (props) => {
                                 label="Contraseña"
                                 type={showPassword ? "text" : "password"}
                                 id="password"
-                                autoComplete="current-password"
+                                autoComplete="new-password"
                                 value={value}
                                 onChange={onChange}
-                                InputProps={{ // <-- This is where the toggle button is added.
+                                InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
                                             <IconButton
@@ -236,6 +228,44 @@ const SignIn = (props) => {
                         render={({ message }) => <p className={classes.errorMsj}>{message}</p>}
                     />
 
+                    <Controller
+                        control={control}
+                        name="confirmPassword"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="confirmPassword"
+                                label="Confirmar Contraseña"
+                                type={showPasswordConfirm ? "text" : "password"}
+                                id="confirmPassword"
+                                autoComplete="current-password"
+                                value={value}
+                                onChange={onChange}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPasswordConfirm}
+                                                onMouseDown={handleMouseDownPasswordConfirm}
+                                            >
+                                                {showPasswordConfirm ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />)
+                        }
+                        defaultValue=""
+                    />
+                    <ErrorMessage
+                        errors={errors}
+                        name="confirmPassword"
+                        render={({ message }) => <p className={classes.errorMsj}>{message}</p>}
+                    />
 
                     {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -250,24 +280,20 @@ const SignIn = (props) => {
                         color="primary"
                         className={classes.submit}
                         onClick={handleSubmit(onSubmit)}
+                        disableFocusRipple={true}
                     >
-                        {sending ? <CircularProgress color="secondary" size={22} /> : "Ingresar"}
+                        {sending ? <CircularProgress color="secondary" size={22} /> : "Registrarse"}
                     </Button>
 
 
 
                     <Grid container>
                         <Grid item xs>
-                            <Link variant="body2" component={LinkRouter} to="/auth/recovery">
-                                ¿Olvidó su contraseña?
+                            <Link variant="body2" component={LinkRouter} to="/auth">
+                                {"¿Ya tiene una cuenta? Inicie Sesion"}
                             </Link>
                         </Grid>
-                        <Grid item>
-                            <Link variant="body2" component={LinkRouter} to="/auth/register">
-                                {"¿No tiene una cuenta? Registrese"}
-                            </Link>
 
-                        </Grid>
                     </Grid>
                 </form>
                 <Snackbar
@@ -276,7 +302,7 @@ const SignIn = (props) => {
                     autoHideDuration={6000}
                     onClose={handleClose}
                 >
-                    <Alert onClose={handleClose} severity="warning">
+                    <Alert onClose={handleClose} severity={status}>
                         {message}
                     </Alert>
                 </Snackbar>
@@ -285,4 +311,4 @@ const SignIn = (props) => {
     );
 }
 
-export default SignIn;
+export default SignUp;

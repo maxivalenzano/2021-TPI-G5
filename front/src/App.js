@@ -1,42 +1,58 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import routes from 'config/routes';
-import Login from 'pages/Login'
-import Footer from 'components/Footer'
+import authRoutes from 'config/auth.routes';
+import authCheck from 'services/auth-check'
 
-function App() {
-
-  const login = true;
-
+const App = () => {
+  let auth = authCheck();
+  console.log("Cookies: ", auth)
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
-        <Route path='/login'>
-          <Login />
-          <Footer
-            title="Los cracks"
-            description="Página diseñada para la matería de DACS"
-          />
-        </Route>
+        {
+          authRoutes.map((route, index) => (
+            <RouterWithSubRoutes key={index} {...route} />
+          ))
+        }
 
-        {login &&
+        {
           routes.map((route, index) => (
-          <RouterWithSubRoutes key={index} {...route} />
+            <PrivateRouterWithSubRoutes key={index} auth={auth} {...route} />
           ))
         }
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-function RouterWithSubRoutes(route) {
+const PrivateRouterWithSubRoutes = (route) => {
+  // console.log("auth props", route)
+  return (
+    <Route
+      path={route.path}
+      exact={route.exact}
+      render={props =>
+        route.auth
+          ? <route.component routes={route.routes} {...props} />
+          : <Redirect to={{
+            pathname: '/auth',
+            state: { from: props.location }
+          }}
+          />
+      }
+    />
+  );
+}
+
+const RouterWithSubRoutes = (route) => {
   return (
     <Route
       path={route.path}
       exact={route.exact}
       render={props => <route.component routes={route.routes} {...props} />}
     />
-  )
+  );
 }
 
 export default App;
