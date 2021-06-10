@@ -10,11 +10,11 @@ const get = (id) => {
 };
 
 const create = (data) => {
-  return axios.post("/ventas", { headers: authHeader() }, data);
+  return axios.post("/ventas", data, { headers: authHeader() });
 };
 
 const update = (id, data) => {
-  return axios.patch(`/ventas/${id}`, { headers: authHeader() }, data);
+  return axios.patch(`/ventas/${id}`, data, { headers: authHeader() });
 };
 
 const remove = (id) => {

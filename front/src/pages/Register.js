@@ -241,7 +241,7 @@ const SignUp = () => {
                                 label="Confirmar Contraseña"
                                 type={showPasswordConfirm ? "text" : "password"}
                                 id="confirmPassword"
-                                autoComplete="current-password"
+                                autoComplete="new-password"
                                 value={value}
                                 onChange={onChange}
                                 InputProps={{
