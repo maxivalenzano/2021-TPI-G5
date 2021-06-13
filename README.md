@@ -54,12 +54,6 @@ npx wdio run ./wdio.conf.js
 
 * Website: https://frre-dacs.github.io/
 * Github: [@FRRe-DACS](https://github.com/FRRe-DACS)
-* LinkedIn:
-- [Cabrera José](https://www.linkedin.com/in/jose-maria-cabrera/)
-- [Curima Jorge](https://www.linkedin.com/in/jorge-curima/)
-- [Quiroz Facundo](https://www.linkedin.com/in/eric-facundo-quir%C3%B3z-b4578a1b0/)
-- [Valenzano Maximiliano](https://linkedin.com/in/maxivalenzano)
-- [Vicentin Erick](https://www.linkedin.com/in/erickvicentin/)
 
 ## 🤝 Contributing
 
@@ -77,38 +71,38 @@ This project is [ISC](https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICEN
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
 
-Collaborators:
+Colaborators (with their respective linkedin):
 
 <table style="width:100%">
   <tr>
     <td>
-	<span>
-  		<img src='./assets/erick-photo.jpeg'>
-		<p>Erick Vicentin</p>
-	</span>
+	<a href='https://www.linkedin.com/in/erickvicentin/'>
+  		<img src='./assets/erick-photo.jpeg' style='border-radius:50%'>
+		<p align='center'>Erick Vicentin</p>
+	</a>
 	</td>
     <td>
-	<span>
-  		<img src="./assets/maxi-photo.jpeg">
-		<p>Maxi Valenzano</p>
-	</span>
+	<a href='https://linkedin.com/in/maxivalenzano'>
+  		<img src="./assets/maxi-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Maxi Valenzano</p>
+	</a>
 	</td>
 	<td>
-	<span>
-  		<img src="./assets/jose-photo.jpeg">
-		<p>Jose Cabrera</p>
-	</span>
+	<a href='https://www.linkedin.com/in/jose-maria-cabrera/'>
+  		<img src="./assets/jose-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Jose Cabrera</p>
+	</a>
 	</td>
 	<td>
-	<span>
-  		<img src="./assets/jorge-photo.jpeg">
-		<p>Jorge Curima</p>
-	</span>
+	<a href='https://www.linkedin.com/in/jorge-curima/'>
+  		<img src="./assets/jorge-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Jorge Curima</p>
+	</a>
 	</td>
 	<td>
-	<span>
-  		<img src="./assets/facu-photo.jpeg">
-		<p>Facundo Quiroz</p>
-	</span>
+	<a href='https://www.linkedin.com/in/eric-facundo-quir%C3%B3z-b4578a1b0/'>
+  		<img src="./assets/facu-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Facundo Quiroz</p>
+	</a>
 	</td>
 </table>
