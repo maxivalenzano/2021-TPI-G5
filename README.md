@@ -14,16 +14,11 @@
   <a href="https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICENSE" target="_blank">
     <img alt="License: ISC" src="https://img.shields.io/github/license/FRRe-DACS/Empresa - Grupo5" />
   </a>
-  <a href="https://twitter.com/maxivalenzano" target="_blank">
-    <img alt="Twitter: maxivalenzano" src="https://img.shields.io/twitter/follow/maxivalenzano.svg?style=social" />
-  </a>
 </p>
 
 > Librería para cargar las ventas y luego mandarlas al ministerio
-
-### 🏠 [Homepage](https://rotiseria-los-cracks.netlify.app/)
-
-### ✨ [Demo](https://rotiseria-los-cracks.netlify.app/)
+ 
+### ✨ [Visit the demo](https://rotiseria-los-cracks.netlify.app/)
 
 ## Prerequisites
 
@@ -41,10 +36,11 @@ npm install
 npm run start
 ```
 
-## Run tests
+## Run tests (you need npx installed)
 
+On the /front folder, run next: 
 ```sh
-npm run test
+npx wdio run ./wdio.conf.js
 ```
 
 ## Author
@@ -58,8 +54,12 @@ npm run test
 
 * Website: https://frre-dacs.github.io/
 * Github: [@FRRe-DACS](https://github.com/FRRe-DACS)
-* Twitter: [@maxivalenzano](https://twitter.com/maxivalenzano)
-* LinkedIn: [@maxivalenzano](https://linkedin.com/in/maxivalenzano)
+* LinkedIn:
+- [Cabrera José](https://www.linkedin.com/in/jose-maria-cabrera/)
+- [Curima Jorge](https://www.linkedin.com/in/jorge-curima/)
+- [Quiroz Facundo](https://www.linkedin.com/in/eric-facundo-quir%C3%B3z-b4578a1b0/)
+- [Valenzano Maximiliano](https://linkedin.com/in/maxivalenzano)
+- [Vicentin Erick](https://www.linkedin.com/in/erickvicentin/)
 
 ## 🤝 Contributing
 
