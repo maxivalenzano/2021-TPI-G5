@@ -1,5 +1,8 @@
+# Trabajo Practico Integrador - Desarrollo de Aplicaciones Cliente-Servidor 2021
+# Universidad Tecnologica Nacional - Facultad Regional Resistencia
+
 <h1 align="center"> Empresa - Grupo5 👋</h1>
-<p>
+<p align='center'>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-14.x-blue.svg" />
   <a href="https://github.com/FRRe-DACS/2021-TPI-G5#readme" target="_blank">
@@ -73,5 +76,39 @@ This project is [ISC](https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICEN
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
-# 2021-TPI-G5
-2021-TPI-G5
+
+Collaborators:
+
+<table style="width:100%">
+  <tr>
+    <td>
+	<span>
+  		<img src='./assets/erick-photo.jpeg'>
+		<p>Erick Vicentin</p>
+	</span>
+	</td>
+    <td>
+	<span>
+  		<img src="./assets/maxi-photo.jpeg">
+		<p>Maximiliano Valenzano</p>
+	</span>
+	</td>
+	<td>
+	<span>
+  		<img src="./assets/jose-photo.jpeg">
+		<p>Jose Cabrera</p>
+	</span>
+	</td>
+	<td>
+	<span>
+  		<img src="./assets/jorge-photo.jpeg">
+		<p>Jorge Curima</p>
+	</span>
+	</td>
+	<td>
+	<span>
+  		<img src="./assets/facu-photo.jpeg">
+		<p>Facundo Quiroz</p>
+	</span>
+	</td>
+</table>
