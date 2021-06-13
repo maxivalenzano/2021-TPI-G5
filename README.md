@@ -1,5 +1,5 @@
-# Trabajo Practico Integrador - Desarrollo de Aplicaciones Cliente-Servidor 2021
-# Universidad Tecnologica Nacional - Facultad Regional Resistencia
+<h1 align="center"> TPI - Desarrollo de Aplicaciones Cliente-Servidor</h1>
+<h1 align="center"> Universidad Tecnologica Nacional - FRRe</h1>
 
 <h1 align="center"> Empresa - Grupo5 👋</h1>
 <p align='center'>
@@ -90,7 +90,7 @@ Collaborators:
     <td>
 	<span>
   		<img src="./assets/maxi-photo.jpeg">
-		<p>Maximiliano Valenzano</p>
+		<p>Maxi Valenzano</p>
 	</span>
 	</td>
 	<td>
