@@ -3,11 +3,7 @@ import Cookies from 'js-cookie'
 const authHeader = () => {
     const user = JSON.parse(Cookies.get('access_token') || "{}")
 
-    if (user && user.accessToken) {
-        return { 'x-access-token': user.accessToken };
-    } else {
-        return {};
-    }
+    return !!user.accessToken ? { 'x-access-token': user.accessToken } : {}
 }
 
 export default authHeader;

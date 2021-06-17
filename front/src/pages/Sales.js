@@ -42,9 +42,13 @@ export default function Sales() {
             })
             .catch(e => {
                 setOpen(true);
-                console.log(JSON.stringify(e.message));
-                setMessage(JSON.stringify(e.message));
-                setStatus("warning")
+                if (e.message == `Request failed with status code 403`) {
+                    setStatus("error");
+                    setMessage("No tiene autorizacion para modificar, llame a un Administrador")
+                } else {
+                    setMessage(JSON.stringify(e.message));
+                    setStatus("warning")
+                }
             });
         setSending(false);
     };

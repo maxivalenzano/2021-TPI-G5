@@ -17,7 +17,7 @@ const authRoutes = [
             {
                 path: "/auth",
                 component: Login,
-                exact: true
+                exact: false
             },
             {
                 path: "/auth/register",
@@ -28,9 +28,6 @@ const authRoutes = [
                 path: "/auth/recovery",
                 component: Recovery,
                 exact: true
-            },
-            {
-                component: Error404
             }
         ]
     },

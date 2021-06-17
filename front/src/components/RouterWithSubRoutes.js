@@ -1,12 +1,17 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import authCheck from 'services/auth-check'
 
 const RouterWithSubRoutes = (route) => {
+    let auth = authCheck();
     return (
         <Route
             path={route.path}
             exact={route.exact}
-            render={props => <route.component routes={route.routes} {...props} />}
+            render={props =>
+                auth
+                    ? <Redirect to={{ pathname: '/' }} />
+                    : <route.component routes={route.routes} {...props} />}
         />
     );
 }

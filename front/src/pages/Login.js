@@ -17,7 +17,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie'
 
 function Alert(props) {
@@ -77,8 +77,8 @@ const SignIn = (props) => {
     //     window.location.reload();
     // }
 
-    // const { state } = useLocation();
-    // const patch = (state.from.pathname || '/').toString();
+    const { state } = useLocation();
+    const patch = !!state ? state.from.pathname : '/';
     // console.log("location:", patch)
 
     // state ? console.log("location2:", props.location.state.pathname) : null
@@ -88,13 +88,13 @@ const SignIn = (props) => {
         try {
             response = await AuthService.login(data);
             if (response.data.accessToken) {
-                Cookies.set('access_token', JSON.stringify(response.data), { expires: 1 });
+                Cookies.set('access_token', JSON.stringify(response.data));
                 // localStorage.setItem("user", );
                 setMessage("Usuario verificado con éxito")
                 setStatus("success")
                 setOpenSnackB(true)
                 setTimeout(() => {
-                    props.history.push('/');
+                    props.history.push(patch);
                     window.location.reload();
                 }, 1000);
                 // return <Redirect to={state.from || '/'} />
