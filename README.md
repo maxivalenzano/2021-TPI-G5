@@ -1,5 +1,8 @@
+<h1 align="center"> TPI - Desarrollo de Aplicaciones Cliente-Servidor</h1>
+<h1 align="center"> Universidad Tecnologica Nacional - FRRe</h1>
+
 <h1 align="center"> Empresa - Grupo5 👋</h1>
-<p>
+<p align='center'>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-14.x-blue.svg" />
   <a href="https://github.com/FRRe-DACS/2021-TPI-G5#readme" target="_blank">
@@ -11,16 +14,11 @@
   <a href="https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICENSE" target="_blank">
     <img alt="License: ISC" src="https://img.shields.io/github/license/FRRe-DACS/Empresa - Grupo5" />
   </a>
-  <a href="https://twitter.com/maxivalenzano" target="_blank">
-    <img alt="Twitter: maxivalenzano" src="https://img.shields.io/twitter/follow/maxivalenzano.svg?style=social" />
-  </a>
 </p>
 
 > Librería para cargar las ventas y luego mandarlas al ministerio
-
-### 🏠 [Homepage](https://rotiseria-los-cracks.netlify.app/)
-
-### ✨ [Demo](https://rotiseria-los-cracks.netlify.app/)
+ 
+### ✨ [Visit the demo](https://rotiseria-los-cracks.netlify.app/)
 
 ## Prerequisites
 
@@ -38,10 +36,11 @@ npm install
 npm run start
 ```
 
-## Run tests
+## Run tests (you need npx installed)
 
+On the /front folder, run next: 
 ```sh
-npm run test
+npx wdio run ./wdio.conf.js
 ```
 
 ## Author
@@ -55,8 +54,6 @@ npm run test
 
 * Website: https://frre-dacs.github.io/
 * Github: [@FRRe-DACS](https://github.com/FRRe-DACS)
-* Twitter: [@maxivalenzano](https://twitter.com/maxivalenzano)
-* LinkedIn: [@maxivalenzano](https://linkedin.com/in/maxivalenzano)
 
 ## 🤝 Contributing
 
@@ -73,5 +70,39 @@ This project is [ISC](https://github.com/FRRe-DACS/2021-TPI-G5/blob/master/LICEN
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
-# 2021-TPI-G5
-2021-TPI-G5
+
+Colaborators (with their respective linkedin):
+
+<table style="width:100%">
+  <tr>
+    <td>
+	<a href='https://www.linkedin.com/in/erickvicentin/'>
+  		<img src='./assets/erick-photo.jpeg' style='border-radius:50%'>
+		<p align='center'>Erick Vicentin</p>
+	</a>
+	</td>
+    <td>
+	<a href='https://linkedin.com/in/maxivalenzano'>
+  		<img src="./assets/maxi-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Maxi Valenzano</p>
+	</a>
+	</td>
+	<td>
+	<a href='https://www.linkedin.com/in/jose-maria-cabrera/'>
+  		<img src="./assets/jose-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Jose Cabrera</p>
+	</a>
+	</td>
+	<td>
+	<a href='https://www.linkedin.com/in/jorge-curima/'>
+  		<img src="./assets/jorge-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Jorge Curima</p>
+	</a>
+	</td>
+	<td>
+	<a href='https://www.linkedin.com/in/eric-facundo-quir%C3%B3z-b4578a1b0/'>
+  		<img src="./assets/facu-photo.jpeg" style='border-radius:50%'>
+		<p align='center'>Facundo Quiroz</p>
+	</a>
+	</td>
+</table>
