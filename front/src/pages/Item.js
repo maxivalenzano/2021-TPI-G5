@@ -76,7 +76,7 @@ export default function Item(props) {
       })
       .catch((e) => {
         // console.log(e.message);
-        if (e.message == `Request failed with status code 403`) {
+        if (e.message === `Request failed with status code 403`) {
           setStatus("error");
           setMessage("No tiene autorizacion para modificar, llame a un Administrador")
         } else {
@@ -112,7 +112,7 @@ export default function Item(props) {
       })
       .catch((e) => {
         // console.log(JSON.stringify(e.message));
-        if (e.message == `Request failed with status code 403`) {
+        if (e.message === `Request failed with status code 403`) {
           setStatus("error");
           setMessage("No tiene autorizacion para eliminar, llame a un Administrador")
         } else {

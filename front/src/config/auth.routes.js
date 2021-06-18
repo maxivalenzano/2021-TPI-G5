@@ -3,7 +3,7 @@
 import LayoutSession from "layouts/LayoutSession";
 
 //Pages
-import Error404 from 'pages/Error404'
+// import Error404 from 'pages/Error404'
 import Login from 'pages/Login'
 import Register from 'pages/Register'
 import Recovery from 'pages/Recovery'
