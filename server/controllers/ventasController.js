@@ -1,6 +1,4 @@
 const { VentaService } = require("../services/");
-
-
 const ventaService = new VentaService();
 
 // denominacion

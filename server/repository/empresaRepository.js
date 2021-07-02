@@ -1,105 +1,76 @@
-const { ministerioUrl } = require("../config/ministerio.config");
+const { ministerioUrl } = require("../config/dependencies.config");
 const ministerioCli = require("dacs-integrador-g5");
 
-class empresaRepository {
+class EmpresaRepository {
 
-    async registrarEmpresa(data) {
-
-        const url = ministerio_url + "/api/signup"
-        try {
-            const response = await ministerioCli.registroMinisterio(url, data);
-        } catch(error) {
-            console.log(error);
-        }
-        return response; 
+  /**
+   * Registrar la empresa dentro del sistema del Ministerio
+   * @param {} data 
+   * @returns 
+   */
+  async registerEmpresa(infoEmpresa) {
+    const urlSignup = ministerioUrl + "/api/signup"
+    try {
+      const response = await ministerioCli.registroMinisterio(urlSignup, infoEmpresa);
+      return response;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    async getAllReports() {
-      const urlLogin = ministerio_url + "/api/login";
-      const urlReports = ministerio_url
+  /**
+   * Obtener todos los reportes de la empresa
+   * @returns 
+   */
+  async getReportes() {
+    const urlLogin = ministerioUrl + "/api/login";
+    const urlReports = ministerioUrl + "/api/reports"
 
-      try {
-          const token = await ministerioCli.iniciarSesionMinisterio(
-            url_login,
-            data.email,
-            data.password,
-          );
-          if (token) {
-            return respuesta = await ministerioCli.getAllReports(
-
-            )
-          }
-
-      } catch (error) {
-
+    try {
+      const token = await ministerioCli.iniciarSesionMinisterio(
+        urlLogin,
+        data.email,
+        data.password,
+      );
+      if (token) {
+        return respuesta = await ministerioCli.obtenerReportes(
+          urlReports,
+          token
+        )
       }
+      return response;
+    } catch (error) {
+        console.log(error);
     }
+  }
 
-    async postReports(reporteMensual) {
-      const url_login = ministerio_url + "/api/login";
-      const url_reports =  ministerio_url + "/api/reports";
-        try {
-            const token = await ministerioCli.iniciarSesionMinisterio(
-                url_login,
-                data.email,
-                data.password
-            );
-            if (token) {
-                return respuesta = await ministerioCli.sendReportesAlMinisterio(
-                    url_reports,
-                    reporteMensual,
-                    token
-                )
-            }
-            return respuesta = "{}";
-        } catch (error) {
-            console.log(error);
-        }
+  /**
+   * Enviar reporte al ministerio
+   * @param {*} reporteMensual 
+   * @returns 
+   */
+  async sendReportes(reporteMensual) {
+    const urlLogin = ministerioUrl + "/api/login";
+    const urlReports = ministerioUrl + "/api/reports";
+    try {
+      const token = await ministerioCli.iniciarSesionMinisterio(
+        urlLogin,
+        data.email,
+        data.password
+      );
+      if (token) {
+        return respuesta = await ministerioCli.sendReportesAlMinisterio(
+          urlReports,
+          reporteMensual,
+          token
+        )
+      }
+      return respuesta = "{}";
+    } catch (error) {
+      console.log(error);
     }
-
+  }
 
 }
 
-const libreria = require("dacs-integrador-g5");
-// const url = process.env.HOST_URL || "";
-const url = "http://localhost:8000";
-const urlMinisterio = url + "/api/ministerio";
-const urlSecretaria = url + "/api/secretaria";
-const urlLogin = url + "/api/login";
-
-const usuario = "usuario";
-const contra = "contra";
-
-const postReports = async (req, res) => {
-  let reporteMensual = req.body.reporte || { ejemplo: "ejemplo" };
-  let respuesta;
-  try {
-    const token = await libreria.iniciarSesionMinisterio(
-      urlLogin,
-      req.body.email,
-      req.body.password
-    );
-    if (token) {
-      respuesta = await libreria.sendReportesAlMinisterio(
-        urlMinisterio,
-        reporteMensual,
-        token
-      );
-    }
-    res.json(respuesta);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getSecretaryStatus = async (req, res) => {
-  const { token } = await libreria.iniciarSesionMinisterio(
-    urlLogin,
-    req.body.email,
-    req.body.password
-  );
-  let estado = await libreria.consultarEstadoASecretaria(urlSecretaria, token);
-  res.send(estado);
-};
-
-module.exports = { postReports, getSecretaryStatus };
+module.exports = EmpresaRepository;
