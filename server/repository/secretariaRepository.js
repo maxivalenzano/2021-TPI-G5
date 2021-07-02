@@ -1,9 +1,10 @@
-const { secretariaUrl } = require("../config/dependencies.config");
+const { secretariaUrl, ministerioUrl } = require("../config/dependencies.config");
 const grupo5lib = require("dacs-integrador-g5");
 
 class SecretariaRepository {
 
     async checkEstadoSecretaria(cuit) {
+        const urlLogin = ministerioUrl + "/api/login";
         const urlEstado = secretariaUrl + "/notifications/" + cuit;
         let response;
         try {

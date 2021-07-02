@@ -1,4 +1,4 @@
-const { EmpresaRepository, SecretariaRepository } = require("../repository/");
+const { EmpresaRepository, SecretariaRepository } = require("../repository");
 
 const empresaRepository = new EmpresaRepository();
 const secretariaRepository = new SecretariaRepository();

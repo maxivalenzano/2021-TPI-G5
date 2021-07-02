@@ -3,19 +3,6 @@ const { EmpresaService } = require("../services/");
 
 const empresaService = new EmpresaService();
 
-// denominacion
-// codigo_ean
-// cantidad_vend
-// precio
-// fecha
-
-// get ventas
-// post venta
-// get venta
-
-// delete venta
-// put venta
-
 /**
  * Obtener todos los reportes
  * @param {resquest}  
@@ -65,29 +52,6 @@ const registerEmpresa = async (request, response) => {
   }
 };
 
-const modifyByID = async (request, response) => {
-  try {
-    const venta = await ventaService.updateVenta(
-      request.params.id,
-      request.body
-    );
-    response.send(venta);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-};
-
-const deleteByID = async (request, response) => {
-  try {
-    console.log("Estoy en delete!")
-    const venta = await ventaService.deleteVentaById(request.params.id);
-
-    if (venta == {}) response.status(404).send("La venta buscada no existe");
-    response.status(200).send(venta);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-};
 
 // const deleteAll = async (request, response) => {
 //   try {
@@ -101,9 +65,7 @@ const deleteByID = async (request, response) => {
 // };
 
 module.exports = {
-  addVenta,
-  getAllVentas,
-  getVentaByID,
-  modifyByID,
-  deleteByID,
+  registerEmpresa,
+  sendReporte,
+  getReportes,
 }
