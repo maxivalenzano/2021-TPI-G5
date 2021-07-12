@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 reporteMensualSchema = new mongoose.Schema({
     infoEmpresa: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Business",
+        ref: "Empresa",
         required: true
     },
-    listaDeRegistros: [
+    listaRegistro: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "RegistroDeVenta",

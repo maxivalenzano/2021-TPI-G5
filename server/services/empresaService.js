@@ -1,4 +1,5 @@
 const { EmpresaRepository, SecretariaRepository } = require("../repository");
+const { ReporteMensual } = require("../models/mongoose/index");
 
 const empresaRepository = new EmpresaRepository();
 const secretariaRepository = new SecretariaRepository();
@@ -28,9 +29,24 @@ class EmpresaService {
      * @param {*} venta 
      * @returns 
      */
-    async addNewReporte(reporte) {
-        const nuevoReporte = new ReporteMensual(reporte);
-        const response = await empresaRepository.sendReportes(nuevoReporte);
+    async addNewReporte(email, secret, reporte) {
+        console.log("PA VE QUE NOS TRAE");
+        console.log(reporte);
+        const reporteNuestro = {...reporte, 
+            listaRegistro: [
+                {
+                    denominacion: reporte.listaRegistro[0].denominacion,
+                    codigo_ean: reporte.listaRegistro[0].codigoEan,
+                    precio_unidad: reporte.listaRegistro[0].precioUnidad,
+                    unidad_medida: reporte.listaRegistro[0].unidadMedida,
+                    cantidad_prod: reporte.listaRegistro[0].cantidadProd,
+                    cantidad_vend: reporte.listaRegistro[0].cantidadVendida
+                }
+            ]
+        }
+        console.log("REPORTE NUESTRO");
+        console.log(reporteNuestro);
+        const response = await empresaRepository.sendReportes(email, secret, reporteNuestro);
         return response;
     }
 

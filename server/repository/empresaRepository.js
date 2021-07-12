@@ -51,24 +51,28 @@ class EmpresaRepository {
    * @param {*} reporteMensual 
    * @returns 
    */
-  async sendReportes(reporteMensual) {
+  async sendReportes(email, secret, reporteMensual) {
     const urlLogin = ministerioUrl + "/api/login";
     const urlReports = ministerioUrl + "/api/reports";
+    let respuesta = [];
     try {
       const token = await ministerioCli.iniciarSesionMinisterio(
         urlLogin,
-        data.email,
-        data.password
+        email,
+        secret
       );
+      console.log("TOKENARDO");
+      console.log(token);
       if (token) {
-        return respuesta = await ministerioCli.sendReportesAlMinisterio(
+          respuesta = await ministerioCli.sendReportesAlMinisterio(
           urlReports,
           reporteMensual,
           token
         )
       }
-      return respuesta = "{}";
+      return respuesta;
     } catch (error) {
+      console.log("SE ROMPIO TODO!")
       console.log(error);
     }
   }

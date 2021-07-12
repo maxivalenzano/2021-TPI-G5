@@ -33,7 +33,10 @@ const sendReporte = async (request, response) => {
   }
 
   try {
-    await empresaService.addNewReporte(request.body);
+    await empresaService.addNewReporte(
+      request.header('email'),
+      request.header('secret'), 
+      request.body);
     response.status(200).send("Reporte enviado con éxito!");
   } catch (error) {
     console.log(error);
