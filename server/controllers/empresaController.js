@@ -10,7 +10,10 @@ const empresaService = new EmpresaService();
  */
 const getReportes = async (request, response) => {
   try {
-    const reportes = await empresaService.getAllReportes();
+    const reportes = await empresaService.getAllReportes(
+      request.header('email'),
+      request.header('secret')
+      );
     response.send(reportes);
   } catch (error) {
     response.status(500).send(error);

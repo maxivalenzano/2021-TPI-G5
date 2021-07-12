@@ -22,18 +22,20 @@ class EmpresaRepository {
    * Obtener todos los reportes de la empresa
    * @returns 
    */
-  async getReportes() {
+  async getReportes(email, secret) {
     const urlLogin = ministerioUrl + "/api/login";
     const urlReports = ministerioUrl + "/api/reports"
-
+    let respuesta;
     try {
       const token = await ministerioCli.iniciarSesionMinisterio(
         urlLogin,
-        data.email,
-        data.password,
+        email,
+        secret,
       );
+      console.log("TOKENARDO!")
+      console.log(token);
       if (token) {
-        return respuesta = await ministerioCli.obtenerReportes(
+        return respuesta = await ministerioCli.getReportesMinisterio(
           urlReports,
           token
         )

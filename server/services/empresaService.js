@@ -18,8 +18,8 @@ class EmpresaService {
      * Obtener todos los reportes de la empresa
      * @returns 
      */
-    async getAllReportes() {
-        const reportes = await empresaRepository.getReportes();
+    async getAllReportes(email, secret) {
+        const reportes = await empresaRepository.getReportes(email, secret);
         return reportes;
     }
 
