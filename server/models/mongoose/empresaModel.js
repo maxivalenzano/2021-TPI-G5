@@ -6,14 +6,11 @@ const empresaSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    nombre:{
-        type:String
-    },
     razon_social:{
         type: String
     }
 
 })
 
-const Empresa = mongoose.model("Empresas", empresaSchema);
+const Empresa = mongoose.model("Empresa", empresaSchema);
 module.exports = Empresa;

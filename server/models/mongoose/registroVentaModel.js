@@ -10,6 +10,10 @@ registroVentaSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    precioUnidad: {
+        type: Number,
+        required: true,
+    },
     unidadMedida: {
         type: String,
         required: true,
