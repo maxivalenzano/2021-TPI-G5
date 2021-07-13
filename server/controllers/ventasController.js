@@ -20,8 +20,9 @@ const ventaService = new VentaService();
  * @param {*} response 
  */
 const getAllVentas = async (request, response) => {
+  const { userId } = request.body;
   try {
-    const ventas = await ventaService.getAllVentas();
+    const ventas = await ventaService.getAllVentas(userId);
     response.send(ventas);
   } catch (error) {
     response.status(500).send(error);
@@ -29,13 +30,13 @@ const getAllVentas = async (request, response) => {
 };
 
 /**
- * 
- * @param {*} request 
- * @param {*} response 
- * @returns 
+ *
+ * @param {*} request
+ * @param {*} response
+ * @returns
  */
 const addVenta = async (request, response) => {
-  if ((Object.keys(request.body).length == 0)) {
+  if (Object.keys(request.body).length == 0) {
     response.status(400).send("No se ha enviado información en el body");
     return;
   }

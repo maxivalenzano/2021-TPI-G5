@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const ventaSchema = new mongoose.Schema({
+  userId: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
   denominacion: {
     type: String,
     required: true,
