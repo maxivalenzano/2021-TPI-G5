@@ -13,7 +13,7 @@ const getReportes = async (request, response) => {
     const reportes = await empresaService.getAllReportes(
       request.header('email'),
       request.header('secret')
-      );
+    );
     response.send(reportes);
   } catch (error) {
     response.status(500).send(error);
@@ -27,21 +27,21 @@ const getReportes = async (request, response) => {
  * @returns reporte
  */
 const sendReporte = async (request, response) => {
+  let respuesta;
   if ((Object.keys(request.body).length == 0)) {
     response.status(400).send("No se ha enviado información en el body");
     return;
   }
 
   try {
-    await empresaService.addNewReporte(
+    respuesta = await empresaService.addNewReporte(
       request.header('email'),
-      request.header('secret'), 
+      request.header('secret'),
       request.body);
-    response.status(200).send("Reporte enviado con éxito!");
   } catch (error) {
-    console.log(error);
     response.status(500).send(error);
   }
+  response.status(200).send(respuesta);
 };
 
 /**
@@ -57,6 +57,18 @@ const registerEmpresa = async (request, response) => {
     response.status(500).send(error);
   }
 };
+
+const checkStatus = async (request, response) => {
+  try {
+    const estado = await empresaService.checkEstado(
+      request.header('email'),
+      request.header('secret'),
+      request.cuit);
+    response.send(estado);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+}
 
 
 // const deleteAll = async (request, response) => {
@@ -74,4 +86,5 @@ module.exports = {
   registerEmpresa,
   sendReporte,
   getReportes,
+  checkStatus
 }

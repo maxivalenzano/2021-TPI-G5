@@ -30,24 +30,27 @@ class EmpresaService {
      * @returns 
      */
     async addNewReporte(email, secret, reporte) {
-        console.log("PA VE QUE NOS TRAE");
-        console.log(reporte);
-        const reporteNuestro = {...reporte, 
-            listaRegistro: [
-                {
-                    denominacion: reporte.listaRegistro[0].denominacion,
-                    codigo_ean: reporte.listaRegistro[0].codigoEan,
-                    precio_unidad: reporte.listaRegistro[0].precioUnidad,
-                    unidad_medida: reporte.listaRegistro[0].unidadMedida,
-                    cantidad_prod: reporte.listaRegistro[0].cantidadProd,
-                    cantidad_vend: reporte.listaRegistro[0].cantidadVendida
-                }
-            ]
+        let response;
+        let listaRegistroOk = reporte.listaRegistro.map(element => {
+            return {
+                denominacion: element.denominacion,
+                codigo_ean: element.codigoEan,
+                precio_unidad: element.precioUnidad,
+                unidad_medida: element.unidadMedida,
+                cantidad_prod: element.cantidadProd,
+                cantidad_vend: element.cantidadVendida
+            }
+        });
+        const reporteMinisterio = {
+            ...reporte,
+            listaRegistro: listaRegistroOk
         }
-        console.log("REPORTE NUESTRO");
-        console.log(reporteNuestro);
-        const response = await empresaRepository.sendReportes(email, secret, reporteNuestro);
-        return response;
+        try {
+            response = await empresaRepository.sendReportes(email, secret, reporteMinisterio);
+            return response;
+        } catch (error) {
+            return (error);
+        }
     }
 
     /**
@@ -55,8 +58,8 @@ class EmpresaService {
      * @param {cuit} cuit 
      * @returns 
      */
-    async checkEstado(cuit) {
-        const response = await secretariaRepository.checkEstadoSecretaria(cuit);
+    async checkEstado(email, secret, cuit) {
+        const response = await secretariaRepository.checkEstadoSecretaria(email, secret, cuit);
         return response;
     }
 }

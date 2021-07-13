@@ -5,6 +5,7 @@ const {
     registerEmpresa,
     sendReporte,
     getReportes,
+    checkStatus,
 } = require("../controllers/empresaController")
 
 app.use(function (req, res, next) {
@@ -29,5 +30,10 @@ app.post(
     "/api/reports",
     sendReporte
 )
+
+app.get(
+    "/api/status",
+    checkStatus
+);
 
 module.exports = app;

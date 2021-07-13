@@ -42,7 +42,7 @@ class EmpresaRepository {
       }
       return response;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
@@ -61,10 +61,8 @@ class EmpresaRepository {
         email,
         secret
       );
-      console.log("TOKENARDO");
-      console.log(token);
       if (token) {
-          respuesta = await ministerioCli.sendReportesAlMinisterio(
+        respuesta = await ministerioCli.sendReportesAlMinisterio(
           urlReports,
           reporteMensual,
           token
@@ -72,8 +70,8 @@ class EmpresaRepository {
       }
       return respuesta;
     } catch (error) {
-      console.log("SE ROMPIO TODO!")
       console.log(error);
+      return error;
     }
   }
 
