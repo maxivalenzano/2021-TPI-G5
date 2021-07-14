@@ -58,12 +58,17 @@ const registerEmpresa = async (request, response) => {
   }
 };
 
+/**
+ * Check estado de la empresa en secretaria
+ * @param {request} request 
+ * @param {response} response 
+ */
 const checkStatus = async (request, response) => {
   try {
     const estado = await empresaService.checkEstado(
       request.header('email'),
       request.header('secret'),
-      request.cuit);
+      request.body);
     response.send(estado);
   } catch (error) {
     response.status(500).send(error);
