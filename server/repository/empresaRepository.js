@@ -61,6 +61,7 @@ class EmpresaRepository {
         email,
         secret
       );
+      console.log(token);
       if (token) {
         respuesta = await ministerioCli.sendReportesAlMinisterio(
           urlReports,
