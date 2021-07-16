@@ -4,8 +4,9 @@ const grupo5lib = require("dacs-integrador-g5");
 class SecretariaRepository {
 
     async checkEstadoSecretaria(email, secret, cuit) {
+        console.log("checkEstadoSecretaria");
         const urlLogin = ministerioUrl + "/api/login";
-        const urlEstado = secretariaUrl + "/notifications/" + cuit;
+        const urlEstado = secretariaUrl + "/status";
         let response;
         try {
           const token = await grupo5lib.iniciarSesionMinisterio(
