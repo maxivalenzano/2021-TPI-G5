@@ -58,9 +58,15 @@ class EmpresaService {
      * @param {cuit} cuit 
      * @returns 
      */
-    async checkEstado(email, secret, request) {
-        const response = await secretariaRepository.checkEstadoSecretaria(email, secret, request.cuit);
-        return response;
+    async checkEstado(email, secret) {
+        let response;
+        try {
+            response = await secretariaRepository.checkEstadoSecretaria(email, secret);
+            return response;
+        } catch (error) {
+            console.log(error);
+            return (error);
+        }
     }
 }
 
