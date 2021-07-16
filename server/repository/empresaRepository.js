@@ -9,6 +9,7 @@ class EmpresaRepository {
    * @returns 
    */
   async registerEmpresa(infoEmpresa) {
+    console.log("registerEmpresa");
     const urlSignup = ministerioUrl + "/api/signup"
     try {
       const response = await ministerioCli.registroMinisterio(urlSignup, infoEmpresa);
@@ -23,19 +24,18 @@ class EmpresaRepository {
    * @returns 
    */
   async getReportes(email, secret) {
+    console.log("getReportes");
     const urlLogin = ministerioUrl + "/api/login";
     const urlReports = ministerioUrl + "/api/reports"
-    let respuesta;
+    let response;
     try {
       const token = await ministerioCli.iniciarSesionMinisterio(
         urlLogin,
         email,
         secret,
       );
-      console.log("TOKENARDO!")
-      console.log(token);
       if (token) {
-        return respuesta = await ministerioCli.getReportesMinisterio(
+        response = await ministerioCli.getReportesMinisterio(
           urlReports,
           token
         )
@@ -52,6 +52,7 @@ class EmpresaRepository {
    * @returns 
    */
   async sendReportes(email, secret, reporteMensual) {
+    console.log("sendReportes");
     const urlLogin = ministerioUrl + "/api/login";
     const urlReports = ministerioUrl + "/api/reports";
     let respuesta = [];
@@ -61,7 +62,6 @@ class EmpresaRepository {
         email,
         secret
       );
-      console.log(token);
       if (token) {
         respuesta = await ministerioCli.sendReportesAlMinisterio(
           urlReports,
