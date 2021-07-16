@@ -67,8 +67,8 @@ const checkStatus = async (request, response) => {
   try {
     const estado = await empresaService.checkEstado(
       request.header('email'),
-      request.header('secret'),
-      request.body);
+      request.header('secret')
+      );
     response.send(estado);
   } catch (error) {
     response.status(500).send(error);

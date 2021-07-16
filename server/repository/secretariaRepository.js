@@ -3,7 +3,7 @@ const grupo5lib = require("dacs-integrador-g5");
 
 class SecretariaRepository {
 
-    async checkEstadoSecretaria(email, secret, cuit) {
+    async checkEstadoSecretaria(email, secret) {
         console.log("checkEstadoSecretaria");
         const urlLogin = ministerioUrl + "/api/login";
         const urlEstado = secretariaUrl + "/status";
